@@ -8,7 +8,7 @@ import lombok.Data;
  * 2020/9/9
  */
 @Data
-public class jobSecond {
+public class JobSecond {
     //职位表二
     //数据库叫 jobtable_sid
     private Integer jobTableSid;

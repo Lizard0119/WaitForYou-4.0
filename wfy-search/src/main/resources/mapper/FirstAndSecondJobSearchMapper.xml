@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+  mybatis的第二种事件方式
+    xml + 接口的方式
+      特点：xml中的namespace必须为接口的全路径
+        xml中的每个节点的id必须为接口的方法名
+-->
+<mapper namespace="com.qy.dao.JobDao">
+
+    <resultMap id="firstandsecondjob" type="JobFirst">
+        <result property="jobTableFid" column="jobtable_fid"></result>
+        <result property="jobTableFistType" column="jobtable_fisttype"></result>
+        <result property="jobTabelSecondType" column="jobtabel_secondtype"></result>
+    </resultMap>
+
+    <select id="findByFirstAndSecondJob" resultMap="firstandsecondjob">
+        select * from tb_jobtablefist firstjob
+            inner join tb_jobtablefist_jobtablesercond fs on firstjob.`jobtable_fid`=fs.`jobtable_fid`
+            inner join tb_jobtabelsecond secondjob on secondjob.`jobtable_sid`=fs.`jobtable_sid`
+            where firstjob.`jobtable_fid`=#{jobTableFid}
+    </select>
+
+</mapper>

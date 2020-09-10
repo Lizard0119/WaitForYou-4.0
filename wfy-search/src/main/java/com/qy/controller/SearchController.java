@@ -33,4 +33,10 @@ public class SearchController {
     public BaseResp searchCompanByCity(@PathVariable("index") String index) throws IOException {
         return searchCompanyService.searchCompanByCity(index);
     }
+
+    //根据职位来查询
+    @RequestMapping("/searchCompanByJob/{index}")
+    public BaseResp searchCompanByJob(@PathVariable("index") String index) throws IOException {
+        return searchCompanyService.searchCompanByJob(index);
+    }
 }

@@ -13,4 +13,7 @@ public interface SearchCompanyService {
 
     //根据市进行查询
     BaseResp searchCompanByCity(String index) throws IOException;
+
+    //根据职位查公司
+    BaseResp searchCompanByJob(String index) throws IOException;
 }
