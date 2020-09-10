@@ -18,6 +18,7 @@
         <module>wfy-resume</module>
         <module>wfy-zuul</module>
         <module>wfy-interview</module>
+        <module>wfy-sendResume</module>
     </modules>
 
     <parent>
