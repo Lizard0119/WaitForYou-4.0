@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+  mybatis的第二种事件方式
+    xml + 接口的方式
+      特点：xml中的namespace必须为接口的全路径
+        xml中的每个节点的id必须为接口的方法名
+
+-->
+
+
+<mapper namespace="com.qy.dao.ProjectExperienceDao">
+
+    <resultMap type="com.qy.pojo.resume.ProjectExperience" id="ProjectExperienceMap">
+        <result property="projectExperienceId" column="projectexperience_id" jdbcType="INTEGER"/>
+        <result property="projectExperienceName" column="projectexperience_name" jdbcType="VARCHAR"/>
+        <result property="projectExperienceRole" column="projectexperience_role" jdbcType="VARCHAR"/>
+        <result property="projectExperienceLastTime" column="projectexperience_lasttime" jdbcType="DATE"/>
+        <result property="projectExperienceBeforeTime" column="projectexperience_beforetime" jdbcType="DATE"/>
+        <result property="projectExperienceDescribe" column="projectexperience_describe" jdbcType="VARCHAR"/>
+        <result property="projectExperiencePerformance" column="projectexperience_performance" jdbcType="VARCHAR"/>
+        <result property="projectExperienceConnect" column="projectexperience_connect" jdbcType="VARCHAR"/>
+
+    </resultMap>
+    <!--  项目经验的查询  -->
+    <select id="findResumeByProjectExperienceId" resultMap="ProjectExperienceMap">
+        select y.* from tb_user u
+            inner join tb_user_projectexperience b on u.user_id = b.user_id
+            inner join tb_projectexperience y on b.projectexperience_id = y.projectexperience_id
+            where u.user_id = #{userId}
+    </select>
+
+
+    <!--  项目经验的添加  -->
+    <insert id="saveResumeProjectExperience">
+    insert into tb_projectexperience
+    (projectexperience_name,
+    projectexperience_role,
+    projectexperience_lasttime,
+    projectexperience_describe,
+    projectexperience_performance,
+    projectexperience_connect,
+    projectexperience_beforetime)
+    values ( #{projectexperienceName},
+    #{projectexperienceRole},
+    #{projectexperienceLasttime},
+    #{projectexperienceDescribe},
+    #{projectexperiencePerformance},
+    #{projectexperienceConnect},
+    #{projectexperienceBeforetime} )
+    </insert>
+
+
+    <!--通过项目经验id删除-->
+    <delete id="deleteResumeByProjectExperienceId">
+        delete from tb_projectexperience where projectexperience_id = #{certificateId}
+    </delete>
+
+    <!--通过项目经验id修改-->
+    <update id="updateResumeByProjectExperienceId">
+        update tb_projectexperience  set projectexperience_name=#{projectexperienceName},
+            projectexperience_role=#{projectexperienceRole},
+            projectexperience_lasttime=#{projectexperienceLasttime},
+            projectexperience_describe=#{projectexperienceDescribe},
+            projectexperience_performance=#{projectexperiencePerformance},
+            projectexperience_connect=#{projectexperienceConnect},
+            projectexperience_beforetime=#{projectexperienceBeforetime}
+        where projectexperience_id = #{projectExperienceId}
+    </update>
+
+</mapper>

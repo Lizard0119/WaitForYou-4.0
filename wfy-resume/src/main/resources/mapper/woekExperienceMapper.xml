@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+  mybatis的第二种事件方式
+    xml + 接口的方式
+      特点：xml中的namespace必须为接口的全路径
+        xml中的每个节点的id必须为接口的方法名
+
+-->
+
+
+<mapper namespace="com.qy.dao.WorkExperienceDao">
+
+    <resultMap type="com.qy.pojo.resume.WorkExperience" id="workExperienceMap">
+        <result property="workExperienceId" column="workexperience_id" jdbcType="INTEGER"/>
+        <result property="workExperienceCompany" column="workexperience_company" jdbcType="VARCHAR"/>
+        <result property="workExperienceIndustry" column="workexperience_industry" jdbcType="VARCHAR"/>
+        <result property="workExperienceWorkingTimeBegin" column="workexperience_workingtimebegin" jdbcType="DATE"/>
+        <result property="workExperienceWorkingTimeEnd" column="workexperience_workingtimeend" jdbcType="DATE"/>
+        <result property="workExperienceType" column="workexperience_type" jdbcType="VARCHAR"/>
+        <result property="workExperienceDepartment" column="workexperience_department" jdbcType="VARCHAR"/>
+        <result property="workExperienceContent" column="workexperience_content" jdbcType="VARCHAR"/>
+        <result property="workExperiencePerformance" column="workexperience_performance" jdbcType="VARCHAR"/>
+
+    </resultMap>
+    <select id="findResumeByWorkExperienceUserId" resultMap="workExperienceMap">
+        select y.* from tb_user u
+            inner join tb_user_workexperience b on u.user_id = b.user_id
+            inner join tb_workexperience y on b.workexperience_id = y.workexperience_id
+            where u.user_id = #{userId}
+    </select>
+
+
+    <insert id="saveWorkExperience">
+    insert into tb_workexperience
+    (workexperience_company,
+     workexperience_industry,
+    workexperience_workingtimebegin,
+     workexperience_workingtimeend,
+      workexperience_type,
+     workexperience_department,
+      workexperience_content,
+       workexperience_performance)
+    values
+     ( #{workExperienceCompany},
+      #{workExperienceIndustry},
+       #{workExperienceWorkingTimeBegin},
+     #{workExperienceWorkingTimeEnd},
+      #{workExperienceType},
+     #{workExperienceDepartment},
+     #{workExperienceContent},
+      #{workExperiencePerformance})
+    </insert>
+
+    <update id="updateWorkExperience" >
+    update tb_workexperience set
+    workexperience_company=#{workExperienceCompany},
+    workexperience_industry=#{workExperienceIndustry},
+    workexperience_workingtimebegin=#{workExperienceWorkingTimeBegin},
+    workexperience_workingtimeend=#{workExperienceWorkingTimeEnd},
+    workexperience_type=#{workExperienceType},
+    workexperience_department=#{workExperienceDepartment},
+    workexperience_content=#{workExperienceContent},
+    workexperience_performance=#{workExperiencePerformance}
+     where workexperience_id=#{workexperienceId}
+    </update>
+
+    <delete id="deleteWorkExperienceById"  >
+
+        delete from tb_workexperience
+         where workexperience_id=#{workexperienceId}
+    </delete>
+
+
+
+</mapper>

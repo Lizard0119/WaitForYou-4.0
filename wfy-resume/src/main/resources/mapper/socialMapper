@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+  mybatis的第二种事件方式
+    xml + 接口的方式
+      特点：xml中的namespace必须为接口的全路径
+        xml中的每个节点的id必须为接口的方法名
+
+-->
+
+
+<mapper namespace="com.qy.dao.SocialDao">
+
+    <resultMap type="com.qy.pojo.resume.Social" id="socialMap">
+        <result property="socialId" column="social_id" jdbcType="INTEGER"/>
+        <result property="socialName" column="social_name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <select id="findResumeBySocialUserId" resultMap="socialMap">
+        select y.* from tb_user u
+            inner join tb_user_social b on u.user_id = b.user_id
+            inner join tb_social y on b.social_id = y.social_id
+            where u.user_id = #{userId}
+    </select>
+
+
+    <insert id="saveResumeSocial">
+    insert into tb_social
+    (social_name)
+    values
+     (#{socialName})
+    </insert>
+
+    <update id="updateSocial" >
+    update tb_social set
+    social_name=#{socialName},
+     where social_id=#{socialId}
+    </update>
+
+    <delete id="deleteSocialById"  >
+
+        delete from tb_social
+         where social_id=#{socialId}
+    </delete>
+
+
+
+</mapper>

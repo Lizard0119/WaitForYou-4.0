@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+  mybatis的第二种事件方式
+    xml + 接口的方式
+      特点：xml中的namespace必须为接口的全路径
+        xml中的每个节点的id必须为接口的方法名
+
+-->
+
+
+<mapper namespace="com.qy.dao.UserProjectExperienceDao">
+
+    <resultMap type="com.qy.pojo.resume.UserProjectExperience" id="UserProjectExperienceMap">
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="projectExperienceId" column="projectexperience_id" jdbcType="INTEGER"/>
+
+    </resultMap>
+    <!--  项目经验和用户的关联表用项目经验用户id的查询  -->
+    <select id="findResumeByUserProjectExperienceId" resultMap="UserProjectExperienceMap">
+        select * from tb_user_projectexperience where tb_user_projectexperience.user_id= #{userId}
+    </select>
+
+
+    <!--  项目经验和用户的关联表用项目经验的添加  -->
+    <insert id="saveResumeUserProjectExperience">
+    insert into tb_user_projectexperience (projectexperience_id,user_id)
+    values ( #{projectexperienceId},#{userId} )
+    </insert>
+
+
+    <!--通过项目经验和用户的关联表用项目经验id删除-->
+    <delete id="deleteResumeByUserProjectExperienceId">
+        delete from tb_user_projectexperience where projectexperience_id = #{projectexperienceId}
+    </delete>
+
+    <!--通过项目经验和用户的关联表用项目经验id修改-->
+    <update id="updateResumeByUserProjectExperienceId">
+        update tb_user_projectexperience  set projectexperience_id = #{projectexperienceId} where projectexperience_id = #{projectexperienceId}
+    </update>
+
+</mapper>

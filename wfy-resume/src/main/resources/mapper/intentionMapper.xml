@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+  mybatis的第二种事件方式
+    xml + 接口的方式
+      特点：xml中的namespace必须为接口的全路径
+        xml中的每个节点的id必须为接口的方法名
+
+-->
+
+
+<mapper namespace="com.qy.dao.IntentionDao">
+
+    <resultMap type="com.qy.pojo.resume.Intention" id="IntentionMap">
+        <result property="intentionId" column="intention_id" jdbcType="INTEGER"/>
+        <result property="intentionStatus" column="intention_status" jdbcType="VARCHAR"/>
+        <result property="intentionPosition" column="intention_position" jdbcType="VARCHAR"/>
+        <result property="intentionBusiness" column="intention_business" jdbcType="VARCHAR"/>
+        <result property="intentionCity" column="intention_city" jdbcType="VARCHAR"/>
+        <result property="intentionPersonally" column="intention_personally" jdbcType="INTEGER"/>
+
+    </resultMap>
+    <!--  求职意向的查询  -->
+    <select id="findResumeByIntentionId" resultMap="IntentionMap">
+        select y.* from tb_user u
+            inner join tb_user_intention b on u.user_id = b.user_id
+            inner join tb_intention y on b.intention_id = y.intention_id
+            where u.user_id = #{userId}
+    </select>
+
+
+    <!--  求职意向的添加  -->
+    <insert id="saveResumeIntention">
+    insert into tb_intention (intention_status, intention_position,
+    intention_business, intention_city, intention_personally)
+    values ( #{intentionStatus}, #{intentionPosition},
+     #{intentionBusiness}, #{intentionCity}, #{intentionPersonally})
+    </insert>
+
+
+    <!--通过求职意向id删除-->
+    <delete id="deleteResumeByIntentionId">
+        delete from tb_intention where intention_id = #{intentionId}
+    </delete>
+
+    <!--通过求职意向id修改-->
+    <update id="updateResumeByIntentionId">
+        update tb_intention  set intention_status=#{intentionStatus}, intention_position=#{intentionPosition},
+     intention_business=#{intentionBusiness}, #{intentionCity}, #{intentionPersonally} where intention_id = #{intentionId}
+    </update>
+
+</mapper>

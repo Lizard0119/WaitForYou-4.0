@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+  mybatis的第二种事件方式
+    xml + 接口的方式
+      特点：xml中的namespace必须为接口的全路径
+        xml中的每个节点的id必须为接口的方法名
+
+-->
+
+
+<mapper namespace="com.qy.dao.UserIntentionDao">
+
+    <resultMap type="com.qy.pojo.resume.UserIntention" id="UserIntentionMap">
+        <result property="intentionId" column="intention_id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+
+    </resultMap>
+    <!--  求职意向和用户的联合表用用户id的查询  -->
+    <select id="findResumeByUserIntentionId" resultMap="UserIntentionMap">
+        select * from tb_user_intention where tb_user_intention.user_id= #{userId}
+    </select>
+
+
+    <!--  项目经验和用户的关联表的添加  -->
+    <insert id="saveResumeUserIntention">
+    insert into tb_user_intention (intention_id,user_id)
+    values ( #{intentionId},#{userId} )
+    </insert>
+
+
+    <!--通过项目经验和用户的关联表删除-->
+    <delete id="deleteResumeByUserIntentionId">
+        delete from tb_user_intention where intention_id = #{intentionId}
+    </delete>
+
+    <!--通过项目经验和用户的关联表删除-->
+    <update id="updateResumeByUserIntentionId">
+        update tb_user_intention  set intention_id = #{intentionId} where intention_id = #{intentionId}
+    </update>
+
+</mapper>

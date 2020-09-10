@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+  mybatis的第二种事件方式
+    xml + 接口的方式
+      特点：xml中的namespace必须为接口的全路径
+        xml中的每个节点的id必须为接口的方法名
+
+-->
+
+
+<mapper namespace="com.qy.dao.ResumeEducationDao">
+
+    <resultMap type="com.qy.pojo.resume.ResumeEducation" id="resumeEducationMap">
+        <result property="resumeEducationId" column="resumeeducation_id" jdbcType="INTEGER"/>
+        <result property="resumeEducationSchool" column="resumeeducation_school" jdbcType="VARCHAR"/>
+        <result property="resumeEducationBackground" column="resumeeducation_background" jdbcType="VARCHAR"/>
+        <result property="resumeEducationMajor" column="resumeeducation_major" jdbcType="VARCHAR"/>
+        <result property="resumeEducationLastTime" column="resumeeducation_lasttime" jdbcType="DATE"/>
+        <result property="resumeEducationBeforeTime" column="resumeeducation_beforetime" jdbcType="DATE"/>
+        <result property="resumeEducationExperience" column="resumeeducation_experience" jdbcType="VARCHAR"/>
+
+
+    </resultMap>
+    <select id="findResumeByResumeEducationUserId" resultMap="resumeEducationMap">
+        select y.* from tb_user u
+            inner join tb_user_resumeeducation b on u.user_id = b.user_id
+            inner join tb_resumeeducation y on b.resumeeducation_id = y.resumeeducation_id
+            where u.user_id = #{userId}
+    </select>
+
+
+    <insert id="saveResumeEducation">
+    insert into tb_resumeeducation
+    (resumeeducation_school,
+     resumeeducation_background ,
+     resumeeducation_major,
+     resumeeducation_lasttime,
+     resumeeducation_beforetime ,
+    resumeeducation_experience )
+    values
+     ( #{resumeEducationSchool},
+      #{resumeEducationBackground},
+       #{resumeEducationMajor},
+     #{resumeEducationLastTime},
+      #{resumeEducationBeforeTime},
+     #{resumeEducationExperience})
+    </insert>
+
+    <update id="updateResumeEducation" >
+    update tb_resumeeducation set
+    resumeeducation_school=#{resumeEducationSchool},
+    resumeeducation_background=#{resumeEducationBackground},
+    resumeeducation_major=#{resumeEducationMajor},
+    resumeeducation_lasttime=#{resumeEducationLastTime},
+    resumeeducation_beforetime=#{resumeEducationBeforeTime},
+    resumeeducation_experience=#{resumeEducationExperience},
+
+     where resumeeducation_id=#{resumeeducationId}
+    </update>
+
+    <delete id="deleteResumeEducationById"  >
+
+        delete from tb_resumeeducation
+         where resumeeducation_id=#{resumeeducationId}
+    </delete>
+
+
+
+</mapper>

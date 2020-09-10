@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+  mybatis的第二种事件方式
+    xml + 接口的方式
+      特点：xml中的namespace必须为接口的全路径
+        xml中的每个节点的id必须为接口的方法名
+
+-->
+
+
+<mapper namespace="com.qy.dao.UserCertificateDao">
+
+    <resultMap type="com.qy.pojo.resume.UserCertificate" id="UserCertificateMap">
+        <result property="certificateId" column="certificate_id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+
+
+    </resultMap>
+    <!--  资格证书和用户的连表的查询  -->
+    <select id="findResumeByUserCertificateId" resultMap="UserCertificateMap">
+        select * from tb_user_certificate where tb_user_certificate.user_id= #{userId}
+    </select>
+
+
+    <!--  资格证书和用户的连表的添加  -->
+    <insert id="saveResumeUserCertificate">
+    insert into tb_user_certificate (certificate_id,user_id)
+    values ( #{certificateId},#{userId} )
+    </insert>
+
+
+    <!--通过资格证书和用户的连表的职格证书id删除-->
+    <delete id="deleteResumeByUserCertificateId">
+        delete from tb_user_certificate where certificate_id = #{certificateId}
+    </delete>
+
+    <!--通过资格证书和用户的连表的用户id删除-->
+    <update id="updateResumeByUserCertificateId">
+        update tb_user_certificate  set certificate_id = #{certificateId} where certificate_id = #{certificateId}
+    </update>
+
+</mapper>

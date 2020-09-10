@@ -1,0 +1,27 @@
+server:
+  port: 8021
+spring:
+  application:
+    name: wfy-search
+  cloud:
+    config:
+      discovery:
+        service-id: wfy-config
+        enabled: true
+      name: neo-config
+      profile: dev
+  data:
+    elasticsearch:
+      cluster-name: wwh
+      cluster-nodes: 127.0.0.1:9300
+      repositories:
+        enabled: true
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka
+    fetch-registry: true
+    register-with-eureka: true
+feign:
+  hystrix:
+    enabled: true
