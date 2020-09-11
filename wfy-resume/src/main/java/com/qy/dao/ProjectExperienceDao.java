@@ -11,7 +11,7 @@ public interface ProjectExperienceDao {
 
 
     //查询所有的项目经验表
-    List<Certificate> findResumeByProjectExperienceId(Integer userId);
+    List<ProjectExperience> findResumeByProjectExperienceId(Integer userId);
     //修改项目经验表
     Integer updateResumeByProjectExperienceId(ProjectExperience projectExperience);
     //添加新的项目经验表

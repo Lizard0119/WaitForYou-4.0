@@ -17,7 +17,7 @@ public class ProjectExperienceImpl implements ProjectExperienceService {
 
     //查询所有的项目经验表
     @Override
-    public List<Certificate> findResumeByProjectExperienceId(Integer userId) {
+    public List<ProjectExperience> findResumeByProjectExperienceId(Integer userId) {
         return projectExperienceDao.findResumeByProjectExperienceId(userId);
     }
 
