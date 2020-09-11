@@ -1,0 +1,19 @@
+server:
+  port: 8002
+spring:
+  application:
+    name: wfy-login
+  cloud:
+    config:
+      discovery:
+        service-id: wfy-config
+        enabled: true
+      name: neo-config
+      profile: dev
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka
+feign:
+  hystrix:
+    enable: true

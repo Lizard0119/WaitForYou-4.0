@@ -19,6 +19,8 @@
         <module>wfy-zuul</module>
         <module>wfy-interview</module>
         <module>wfy-sendResume</module>
+        <module>wfy-alipay</module>
+        <module>wfy-user</module>
     </modules>
 
     <parent>
