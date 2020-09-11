@@ -1,6 +1,19 @@
 server:
   port: 8002
 spring:
+  #邮箱配置
+  mail:
+    host: smtp.qq.com
+    username: 1109046740@qq.com
+    password: burjszcymtafjcjh
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
   application:
     name: wfy-login
   cloud:
