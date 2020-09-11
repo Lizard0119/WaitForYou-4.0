@@ -7,7 +7,7 @@ import lombok.Data;
 public class UserResumeEducation {
 
 //    用户的id
-    private int user_id;
+    private int userId;
 //    项目的教育经经历id
     private int resumeEducationId;
 

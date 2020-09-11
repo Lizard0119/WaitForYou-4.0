@@ -33,7 +33,7 @@
     </select>
 
 
-    <insert id="saveResumeEducation">
+    <insert id="saveResumeEducation" useGeneratedKeys="true" keyProperty="resumeEducationId">
     insert into tb_resumeeducation
     (resumeeducation_school,
      resumeeducation_background ,

@@ -28,7 +28,7 @@
     </select>
 
 
-    <insert id="saveResumeSocial">
+    <insert id="saveResumeSocial" useGeneratedKeys="true" keyProperty="socialId">
     insert into tb_social
     (social_name)
     values

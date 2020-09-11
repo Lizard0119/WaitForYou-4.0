@@ -34,7 +34,7 @@
     </select>
 
 
-    <insert id="saveWorkExperience">
+    <insert id="saveWorkExperience" useGeneratedKeys="true" keyProperty="workExperienceId">
     insert into tb_workexperience
     (workexperience_company,
      workexperience_industry,
