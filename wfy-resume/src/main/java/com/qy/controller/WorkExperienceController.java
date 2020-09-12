@@ -19,8 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
-@RequestMapping
-@RestController("/workExperience")
+@RequestMapping("/workExperience")
+@RestController
 public class WorkExperienceController {
 
 

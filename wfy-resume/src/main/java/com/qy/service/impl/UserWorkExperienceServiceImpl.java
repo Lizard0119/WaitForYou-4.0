@@ -2,13 +2,14 @@ package com.qy.service.impl;
 
 import com.qy.dao.UserWorkExperienceDao;
 import com.qy.pojo.resume.UserWorkExperience;
+import com.qy.service.UserWorkExperienceService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public class UserWorkExperienceServiceImpl implements UserWorkExperienceDao {
+public class UserWorkExperienceServiceImpl implements UserWorkExperienceService {
 
     @Resource
     UserWorkExperienceDao userWorkExperienceDao;
