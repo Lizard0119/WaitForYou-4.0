@@ -21,8 +21,7 @@ import java.util.List;
 @RequestMapping("/IntentionController")
 public class IntentionController {
 
-    @Autowired
-    RedisTemplate redisTemplate;
+
 
     @Autowired
     IntentionService intentionService;
@@ -35,16 +34,16 @@ public class IntentionController {
         return intentionService.findResumeByIntentionId(userId);
     }
 
-    @RequestMapping("/saveResumeIntention")
-    public Integer saveResumeIntention(@RequestBody Intention intention,  HttpServletRequest request) {
+    @RequestMapping("/saveResumeIntention/{userId}")
+    public Integer saveResumeIntention(@RequestBody Intention intention,@PathVariable("userId")Integer userId) {
 
-        User user = findUserByToken(request);
+
         if (intentionService.saveResumeIntention(intention) > 0) {
-            intention.getIntentionId();
+
             UserIntention userIntention = new UserIntention();
             userIntention.setIntentionId(intention.getIntentionId());
             //用户的id 占时写死，后面接收前端传回来cook获取用户的id
-            userIntention.setUserId(user.getUserid());
+            userIntention.setUserId(userId);
 
             if (userIntentionService.saveResumeUserIntention(userIntention) > 0) {
                 return 1;
@@ -74,28 +73,4 @@ public class IntentionController {
         return 0;
     }
 
-    public User findUserByToken(HttpServletRequest request){
-        Cookie[] cookies = request.getCookies();
-        String token = getToken(cookies);
-
-        Object o = redisTemplate.opsForValue().get(token);
-        Object o1 = JSONObject.toJSON(o);
-
-        User tbUser = JSONObject.parseObject(o1.toString(), User.class);
-        return tbUser;
-    }
-
-    public String getToken(Cookie [] cookies){
-        if (cookies!=null){
-            for (Cookie cook:cookies
-            ) {
-                if (cook.getName().equals("token")){
-                    String token = cook.getValue();
-                    return token;
-                }
-            }
-            return null;
-        }
-        return null;
-    }
 }

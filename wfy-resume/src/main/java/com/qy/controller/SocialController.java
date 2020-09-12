@@ -23,8 +23,6 @@ public class SocialController {
 
     @Autowired
     SocialService socialService;
-    @Autowired
-    RedisTemplate redisTemplate;
 
     @Autowired
     UserSocialService userSocialService;
@@ -37,16 +35,16 @@ public class SocialController {
     }
 
 
-    @RequestMapping("/saveResumeSocial")
-    public String saveResumeSocial(@RequestBody Social social, HttpServletRequest request){
+    @RequestMapping("/saveResumeSocial/{userId}")
+    public String saveResumeSocial(@RequestBody Social social, @PathVariable("userId") Integer userId){
 
-        User user =findUserByToken(request);
+
        if (socialService.saveResumeSocial(social)>0){
            Integer socialId = social.getSocialId();
            System.out.println(socialId);
             //预留关联表增加
             userSocial.setSocialId(socialId);
-            userSocial.setUserId(user.getUserid());
+            userSocial.setUserId(userId);
            if (userSocialService.saveUserUserSocial(userSocial)>0){
 
           return "成功";}
@@ -75,29 +73,4 @@ public class SocialController {
         return "失败";
     }
 
-
-    public User findUserByToken(HttpServletRequest request){
-        Cookie[] cookies = request.getCookies();
-        String token = getToken(cookies);
-
-        Object o = redisTemplate.opsForValue().get(token);
-        Object o1 = JSONObject.toJSON(o);
-
-        User tbUser = JSONObject.parseObject(o1.toString(), User.class);
-        return tbUser;
-    }
-
-    public String getToken(Cookie [] cookies){
-        if (cookies!=null){
-            for (Cookie cook:cookies
-            ) {
-                if (cook.getName().equals("token")){
-                    String token = cook.getValue();
-                    return token;
-                }
-            }
-            return null;
-        }
-        return null;
-    }
 }

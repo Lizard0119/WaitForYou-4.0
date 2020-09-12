@@ -21,8 +21,7 @@ import java.util.List;
 @RequestMapping("/CertificateController")
 public class CertificateController {
 
-    @Autowired
-    RedisTemplate redisTemplate;
+
 
     @Autowired
     CertificateService certificateService;
@@ -36,10 +35,10 @@ public class CertificateController {
     }
 
 
-    @RequestMapping("/saveResumeCertificate")
-    public Integer saveResumeCertificate(@RequestBody Certificate certificate,  HttpServletRequest request) {
+    @RequestMapping("/saveResumeCertificate/{userId}")
+    public Integer saveResumeCertificate(@RequestBody Certificate certificate,@PathVariable("userId") Integer userId) {
 
-        User user =findUserByToken(request);
+
         if (certificateService.saveResumeCertificate(certificate)>0){
 
             certificate.getCertificateId();
@@ -48,7 +47,7 @@ public class CertificateController {
             userCertificate.setCertificateId(certificate.getCertificateId());
             //用户的id 占时写死，后面接收前端传回来cook获取用户的id
 
-            userCertificate.setUserId(user.getUserid());
+            userCertificate.setUserId(userId);
 
             if(userCertificateService.saveResumeUserCertificate(userCertificate)>0){
                 return 1;
@@ -77,29 +76,5 @@ public class CertificateController {
         return 0;
     }
 
-    public User findUserByToken(HttpServletRequest request){
-        Cookie[] cookies = request.getCookies();
-        String token = getToken(cookies);
-
-        Object o = redisTemplate.opsForValue().get(token);
-        Object o1 = JSONObject.toJSON(o);
-
-        User tbUser = JSONObject.parseObject(o1.toString(), User.class);
-        return tbUser;
-    }
-
-    public String getToken(Cookie [] cookies){
-        if (cookies!=null){
-            for (Cookie cook:cookies
-            ) {
-                if (cook.getName().equals("token")){
-                    String token = cook.getValue();
-                    return token;
-                }
-            }
-            return null;
-        }
-        return null;
-    }
 
 }

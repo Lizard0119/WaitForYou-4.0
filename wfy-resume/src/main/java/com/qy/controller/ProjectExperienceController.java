@@ -21,8 +21,7 @@ import java.util.List;
 @RequestMapping("/ProjectExperienceController")
 public class ProjectExperienceController {
 
-    @Autowired
-    RedisTemplate redisTemplate;
+
 
     @Autowired
     ProjectExperienceService projectExperienceService;
@@ -35,16 +34,16 @@ public class ProjectExperienceController {
         return projectExperienceService.findResumeByProjectExperienceId(userId);
     }
 
-    @RequestMapping("/saveResumeProjectExperience")
-    public Integer saveResumeProjectExperience(@RequestBody ProjectExperience projectExperience, HttpServletRequest request) {
+    @RequestMapping("/saveResumeProjectExperience/{userId}")
+    public Integer saveResumeProjectExperience(@RequestBody ProjectExperience projectExperience, @PathVariable("userId")Integer userId) {
 
-        User user = findUserByToken(request);
+
         if (projectExperienceService.saveResumeProjectExperience(projectExperience)>0){
 
             UserProjectExperience userProjectExperience = new UserProjectExperience();
             userProjectExperience.setProjectExperienceId(projectExperience.getProjectExperienceId());
             //用户的id 占时写死，后面接收前端传回来cook获取用户的id
-            userProjectExperience.setUserId(user.getUserid());
+            userProjectExperience.setUserId(userId);
 
             if (userProjectExperienceService.saveResumeUserProjectExperience(userProjectExperience)>0){
                 return 1;
@@ -72,29 +71,5 @@ public class ProjectExperienceController {
         return 0;
     }
 
-    public User findUserByToken(HttpServletRequest request){
-        Cookie[] cookies = request.getCookies();
-        String token = getToken(cookies);
-
-        Object o = redisTemplate.opsForValue().get(token);
-        Object o1 = JSONObject.toJSON(o);
-
-        User tbUser = JSONObject.parseObject(o1.toString(), User.class);
-        return tbUser;
-    }
-
-    public String getToken(Cookie [] cookies){
-        if (cookies!=null){
-            for (Cookie cook:cookies
-            ) {
-                if (cook.getName().equals("token")){
-                    String token = cook.getValue();
-                    return token;
-                }
-            }
-            return null;
-        }
-        return null;
-    }
 
 }
