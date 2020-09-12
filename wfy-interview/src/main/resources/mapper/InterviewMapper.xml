@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qy.dao.IInterviewDao">
+    <resultMap id="interviewmap" type="interview">
+        <id property="interviewId" column="interview_id" />
+        <result property="interviewData" column="interview_data"/>
+        <result property="interviewSite" column="interview_site"/>
+        <result property="interviewContactName" column="interview_contact_name"/>
+        <result property="interviewTelephone" column="interview_telephone"/>
+    </resultMap>
+
+    <insert id="saveInterview" useGeneratedKeys="true" keyProperty="interviewId" parameterType="interview">
+        insert into tb_interview values(#{interviewId}, #{interviewData}, #{interviewSite}, #{interviewContactName}, #{interviewTelephone})
+    </insert>
+    <delete id="removeInterview">
+        delete from tb_interview where interview_id = #{interviewId}
+    </delete>
+</mapper>

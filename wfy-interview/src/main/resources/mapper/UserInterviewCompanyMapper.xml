@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qy.dao.IUserInterviewCompanyDao">
+    <resultMap id="userinterviewcompanymap" type="userinterviewcompany">
+        <result property="companyName" column="company_name"/>
+        <result property="companyAddress" column="company_address"/>
+        <result property="jobId" column="job_id"/>
+        <result property="jobName" column="job_name"/>
+        <result property="jobPay" column="job_pay"/>
+        <result property="interviewData" column="interview_data"/>
+        <result property="interviewSite" column="interview_site"/>
+        <result property="interviewContactName" column="interview_contact_name"/>
+        <result property="interviewTelephone" column="interview_telephone"/>
+    </resultMap>
+    <select id="findAllUserInterviewCompany" resultMap="userinterviewcompanymap">
+        select c.company_name, c.company_address, j.job_id, j.job_name, j.job_pay, i.interview_data, i.interview_site, i.interview_contact_name, i.interview_telephone from tb_user u inner join  tb_user_job uj on u.user_id = uj.user_id inner join tb_job j on uj.job_id = j.job_id inner join tb_interview_user iu on u.user_id = iu.user_id inner join tb_interview i on iu.interview_id = i.interview_id inner join tb_interview_company ic on i.interview_id = ic.interview_id inner join tb_company c on ic.company_id = c.company_id where u.user_id = #{userId};
+    </select>
+</mapper>

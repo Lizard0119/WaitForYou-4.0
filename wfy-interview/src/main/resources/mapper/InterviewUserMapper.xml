@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qy.dao.IInterviewUserDao">
+
+    <insert id="saveInterviewUser">
+        insert into tb_interview_user values(#{interviewId}, #{userId})
+    </insert>
+    <delete id="removeInterviewUser">
+        delete from tb_interview_user where interview_id = #{interviewId} and user_id = #{userId}
+    </delete>
+</mapper>
