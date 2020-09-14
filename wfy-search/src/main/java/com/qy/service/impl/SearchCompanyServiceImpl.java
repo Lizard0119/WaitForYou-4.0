@@ -1,6 +1,6 @@
 package com.qy.service.impl;
 
-import com.qy.pojo.*;
+import com.qy.pojo.search.*;
 import com.qy.service.SearchCompanyService;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
@@ -26,13 +26,18 @@ public class SearchCompanyServiceImpl implements SearchCompanyService {
 
     //根据公司名进行查询
     @Override
-    public BaseResp searchByCompanyName(String index) throws IOException {
+    public BaseResp searchByCompanyName(String index, Integer page, Integer size) throws IOException {
         SearchRequest searchRequest = new SearchRequest("wfy-province2city2company");
         searchRequest.types("doc");
 
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 
         searchSourceBuilder.query(QueryBuilders.multiMatchQuery(index, "companyname", "companyshortname").field("companyshortname", 5));
+
+        //设置分页
+        int from = (page-1)*size;
+        searchSourceBuilder.from(from);
+        searchSourceBuilder.size(size);
 
         searchRequest.source(searchSourceBuilder);
 
@@ -83,13 +88,18 @@ public class SearchCompanyServiceImpl implements SearchCompanyService {
 
     //根据省份进行查询
     @Override
-    public BaseResp searchCompanByProvince(String index) throws IOException {
+    public BaseResp searchCompanByProvince(String index, Integer page, Integer size) throws IOException {
         SearchRequest searchRequest = new SearchRequest("wfy-province2city2company");
         searchRequest.types("doc");
 
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 
         searchSourceBuilder.query(QueryBuilders.multiMatchQuery(index, "province"));
+
+        //设置分页
+        int from = (page-1)*size;
+        searchSourceBuilder.from(from);
+        searchSourceBuilder.size(size);
 
         searchRequest.source(searchSourceBuilder);
 
@@ -140,13 +150,18 @@ public class SearchCompanyServiceImpl implements SearchCompanyService {
 
     //根据市进行查询
     @Override
-    public BaseResp searchCompanByCity(String index) throws IOException {
+    public BaseResp searchCompanByCity(String index, Integer page, Integer size) throws IOException {
         SearchRequest searchRequest = new SearchRequest("wfy-province2city2company");
         searchRequest.types("doc");
 
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 
         searchSourceBuilder.query(QueryBuilders.multiMatchQuery(index, "city"));
+
+        //设置分页
+        int from = (page-1)*size;
+        searchSourceBuilder.from(from);
+        searchSourceBuilder.size(size);
 
         searchRequest.source(searchSourceBuilder);
 
@@ -197,13 +212,18 @@ public class SearchCompanyServiceImpl implements SearchCompanyService {
 
     //根据职位查公司
     @Override
-    public BaseResp searchCompanByJob(String index) throws IOException {
+    public BaseResp searchCompanByJob(String index, Integer page, Integer size) throws IOException {
         SearchRequest searchRequest = new SearchRequest("wfy-province2city2company");
         searchRequest.types("doc");
 
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 
         searchSourceBuilder.query(QueryBuilders.multiMatchQuery(index, "jobname"));
+
+        //设置分页
+        int from = (page-1)*size;
+        searchSourceBuilder.from(from);
+        searchSourceBuilder.size(size);
 
         searchRequest.source(searchSourceBuilder);
 

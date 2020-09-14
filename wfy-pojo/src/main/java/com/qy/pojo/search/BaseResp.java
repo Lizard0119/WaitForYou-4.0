@@ -1,4 +1,4 @@
-package com.qy.pojo;
+package com.qy.pojo.search;
 
 import lombok.Data;
 

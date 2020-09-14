@@ -1,8 +1,8 @@
 package com.qy.service;
 
-import com.qy.pojo.BaseResp;
-import com.qy.pojo.JobFirst;
-import com.qy.pojo.JobSecond;
+import com.qy.pojo.search.BaseResp;
+import com.qy.pojo.search.JobFirst;
+import com.qy.pojo.search.JobSecond;
 
 public interface JobService {
     // job的第一分类CRUD

@@ -1,7 +1,7 @@
 package com.qy.dao;
 
-import com.qy.pojo.JobFirst;
-import com.qy.pojo.JobSecond;
+import com.qy.pojo.search.JobFirst;
+import com.qy.pojo.search.JobSecond;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

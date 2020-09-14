@@ -1,8 +1,8 @@
 package com.qy.controller;
 
-import com.qy.pojo.BaseResp;
-import com.qy.pojo.JobFirst;
-import com.qy.pojo.JobSecond;
+import com.qy.pojo.search.BaseResp;
+import com.qy.pojo.search.JobFirst;
+import com.qy.pojo.search.JobSecond;
 import com.qy.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
