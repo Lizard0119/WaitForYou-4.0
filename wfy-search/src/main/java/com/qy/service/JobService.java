@@ -17,7 +17,7 @@ public interface JobService {
     String saveJobFirst(JobFirst jobFirst);
 
     // job的第二分类CRUD
-    BaseResp findAllJobSecond();
+    BaseResp findAllJobSecond(Integer page, Integer size);
 
     JobSecond getJobSecondById(Integer jobTableSid);
 
