@@ -1,0 +1,21 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: wfy-zuul
+  cloud:
+    config:
+      name: neo-config
+      profile: dev
+      discovery:
+        service-id: wfy-config
+        enabled: true
+zuul:
+  sensitive-headers:
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka
+ribbon:
+  ConnectTimeOut: 100000
+  ReadTimeOut: 100000
