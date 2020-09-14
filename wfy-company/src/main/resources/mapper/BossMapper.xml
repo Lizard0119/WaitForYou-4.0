@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qy.dao.BossDao">
+    <resultMap id="createBoss" type="Boss">
+        <id property="bossId" column="boss_id"/>
+        <result property="bossName" column="boss_name"/>
+        <result property="bossSex" column="boss_sex"/>
+        <result property="bossPhone" column="boss_phone"/>
+        <result property="bossCompanyId" column="boss_companyid"/>
+    </resultMap>
+
+    <insert id="createBoss">
+        insert into tb_boss values (null,#{bossName},#{bossSex},#{bossPhone},#{bossCompanyId});
+    </insert>
+</mapper>

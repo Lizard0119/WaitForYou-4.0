@@ -21,6 +21,7 @@
         <module>wfy-sendResume</module>
         <module>wfy-alipay</module>
         <module>wfy-user</module>
+        <module>wfy-company</module>
     </modules>
 
     <parent>
