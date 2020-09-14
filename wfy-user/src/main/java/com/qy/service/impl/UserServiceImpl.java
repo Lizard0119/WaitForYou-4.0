@@ -2,7 +2,9 @@ package com.qy.service.impl;
 
 import com.qy.dao.IUserDao;
 import com.qy.pojo.user.User;
+import com.qy.pojo.user.UserReq;
 import com.qy.service.IUserService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -31,40 +33,37 @@ public class UserServiceImpl implements IUserService {
             return "密码错误";
         }
 
-        UUID token = UUID.randomUUID();
+        String token = UUID.randomUUID().toString();
         //以token为key，查询出的用户对象为value存储到redis中
-        redisTemplate.opsForValue().set(token.toString(),byUsername);
-        redisTemplate.expire(token.toString(),30, TimeUnit.MINUTES);
+        redisTemplate.opsForValue().set(token,byUsername);
+        //设置redis中数据失效的时间
+        redisTemplate.expire(token,30, TimeUnit.MINUTES);
 
-        return token.toString();
+        return token;
     }
 
-//    @Override
-//    public String Register(User user) {
-//
-//        User byUsernameAndEmail = userDao.findByUsernameAndEmail(user);
-//
-//        if (byUsernameAndEmail.getUsername().equals(user.getUsername())){
-//            return "用户名已存在";
-//        }else if (byUsernameAndEmail.getUserEmail().equals(user.getUserEmail())){
-//            return "邮箱已被注册";
-//        }
-//
-//        return "注册成功";
-//    }
+    @Override
+    public String register(UserReq userReq) {
 
-
-    public String getToken(Cookie[] cookies){
-        if (cookies != null){
-            for (Cookie cook:cookies
-            ) {
-                if (cook.getName().equals("token")){
-                    String token = cook.getValue();
-                    return token;
-                }
+        //通过LoginName获取在Redis中的验证码
+        String userEmail = userReq.getUserEmail();
+        System.out.println(userEmail);
+        String o = redisTemplate.opsForValue().get(userEmail).toString();
+        if (o != null){
+            if (o.toString().equals(userReq.getCode())){
+                //验证码比对通过，添加到数据库，用户注册成功
+                User user = new User();
+//                user.setUserEmail(userEmail);
+//                user.setPassword(userReq.getPassword());
+//                user.setUsername(userReq.getUsername());
+                BeanUtils.copyProperties(userReq,user);
+                userDao.Register(user);
+                return "注册成功";
+            }else {
+                return "验证码错误";
             }
-            return null;
         }
-        return null;
+        return "验证码超时";
     }
+
 }

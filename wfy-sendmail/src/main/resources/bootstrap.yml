@@ -1,0 +1,35 @@
+server:
+  port: 8003
+spring:
+  #邮箱配置
+  mail:
+    host: smtp.qq.com
+    username: 1109046740@qq.com
+    password: burjszcymtafjcjh
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+  application:
+    name: wfy-sendmail
+  cloud:
+    config:
+      discovery:
+        service-id: wfy-config
+        enabled: true
+      name: neo-config
+      profile: dev
+#  rabbitmq:
+#    host: 127.0.0.1
+#    port: 5672
+#    username: admin
+#    password: admin
+#    virtual-host: /
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka
