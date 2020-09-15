@@ -22,6 +22,7 @@
         <module>wfy-alipay</module>
         <module>wfy-user</module>
         <module>wfy-company</module>
+        <module>wfy-sendmail</module>
     </modules>
 
     <parent>

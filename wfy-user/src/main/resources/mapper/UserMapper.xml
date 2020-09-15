@@ -9,9 +9,9 @@
         xml中的每个节点的id必须为接口的方法名
 -->
 <mapper namespace="com.qy.dao.IUserDao">
-    <resultMap type="com.qy.pojo.user.User" id="Register">
-        <result property="userEmail" column="user_email" jdbcType="VARCHAR"/>
-    </resultMap>
+<!--    <resultMap type="com.qy.pojo.user.User" id="Register">-->
+<!--        <result property="userEmail" column="user_email" jdbcType="VARCHAR"/>-->
+<!--    </resultMap>-->
     <insert id="Register" keyProperty="com.qy.pojo.user.User">
         insert into tb_user(user_id,user_email,password,username) values(#{userid},#{userEmail},#{password},#{username});
     </insert>
