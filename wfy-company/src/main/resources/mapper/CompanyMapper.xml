@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qy.dao.CompanyDao">
+    <!--<resultMap id="create" type="Company">-->
+        <!--<id property="companyId" column="company_id"/>-->
+        <!--<result property="companyName" column="company_name"/>-->
+        <!--<result property="companyShortName" column="company_shortname"/>-->
+        <!--<result property="companyProfile" column="company_profile"/>-->
+        <!--<result property="companyAddress" column="company_address"/>-->
+        <!--<result property="companyBoss" column="company_boss"/>-->
+        <!--<result property="companyRegisteredCapital" column="company_registered_capital"/>-->
+        <!--<result property="companyDate" column="company_date"/>-->
+        <!--<result property="companyImg" column="company_img"/>-->
+        <!--<result property="companyCode" column="company_code"/>-->
+        <!--<result property="companyBusinessScope" column="company_business_scope"/>-->
+        <!--<result property="companyStatus" column="company_status"/>-->
+        <!--<result property="companyVcr" column="company_vcr"/>-->
+        <!--<result property="companyScale" column="company_scale"/>-->
+        <!--<result property="companyFinancing" column="company_financing"/>-->
+    <!--</resultMap>-->
+
+    <insert id="createCompany">
+        insert into tb_company values (null,#{companyName},#{companyShortName},#{companyAddress},#{companyProfile},#{companyBoss},#{companyRegisteredCapital},#{companyDate},#{companyImg},#{companyCode},#{companyBusinessScope},#{companyStatus},#{companyVcr},#{companyScale},#{companyFinancing},null)
+    </insert>
+
+</mapper>
