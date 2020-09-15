@@ -12,7 +12,7 @@
 <!--    <resultMap type="com.qy.pojo.user.User" id="Register">-->
 <!--        <result property="userEmail" column="user_email" jdbcType="VARCHAR"/>-->
 <!--    </resultMap>-->
-    <insert id="Register" keyProperty="com.qy.pojo.user.User">
+    <insert id="Register"  parameterType="com.qy.pojo.user.User">
         insert into tb_user(user_id,user_email,password,username) values(#{userid},#{userEmail},#{password},#{username});
     </insert>
 </mapper>

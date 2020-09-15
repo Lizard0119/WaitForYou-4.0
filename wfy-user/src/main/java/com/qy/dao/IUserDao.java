@@ -11,5 +11,5 @@ public interface IUserDao {
     @Select("select * from tb_user where username= #{username}")
     User findByUsername(@Param("username") String username);
 
-    User Register(User user);
+    int Register(User user);
 }

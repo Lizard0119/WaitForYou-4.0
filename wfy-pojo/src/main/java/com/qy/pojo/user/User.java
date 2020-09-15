@@ -22,5 +22,6 @@ public class User {
     private int userJobState;
     private Date userCreateTime;
     private String userAddress;
+    private String userTel;
 
 }
