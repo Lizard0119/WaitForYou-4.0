@@ -39,5 +39,11 @@ public class CertificateServiceImpl implements CertificateService {
     }
 
 
+    //查询单个的资格证书
+    @Override
+    public Certificate findByCertificateId(Integer certificateId) {
+        return certificateDao.findByCertificateId(certificateId);
+    }
+
 
 }

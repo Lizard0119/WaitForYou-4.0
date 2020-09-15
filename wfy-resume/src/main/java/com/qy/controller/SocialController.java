@@ -73,4 +73,11 @@ public class SocialController {
         return "失败";
     }
 
+    @RequestMapping("/findByResumeEducationUserId/{socialId}")
+    public Social findBySocialUserId(@PathVariable("socialId") Integer socialId) {
+
+        return socialService.findBySocialUserId(socialId);
+
+    }
+
 }

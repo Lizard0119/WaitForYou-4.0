@@ -76,5 +76,13 @@ public class WorkExperienceController {
         return "失败";
     }
 
+    @RequestMapping("/findByWorkExperienceUserId/{workExperienceId}")
+    public WorkExperience findByWorkExperienceUserId(@PathVariable("workExperienceId") Integer workExperienceId) {
+
+        return workExperienceService.findByWorkExperienceUserId(workExperienceId);
+
+    }
+
+
 
 }

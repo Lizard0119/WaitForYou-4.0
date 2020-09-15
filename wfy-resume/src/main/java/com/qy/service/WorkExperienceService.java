@@ -15,4 +15,7 @@ public interface WorkExperienceService {
     int deleteWorkExperienceById(Integer workExperienceId);
     //工作经历删除方法
     int updateWorkExperience(WorkExperience workExperience);
+    //通过查询单个工作经历
+    WorkExperience findByWorkExperienceUserId(Integer workExperienceId);
+
 }

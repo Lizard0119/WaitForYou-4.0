@@ -79,4 +79,13 @@ public class ResumeEducationController {
         return "失败";
     }
 
+
+    @RequestMapping("/findByResumeEducationUserId/{resumeEducationId}")
+    public ResumeEducation findByResumeEducationUserId(@PathVariable("resumeEducationId") Integer resumeEducationId) {
+
+        return resumeEducationService.findByResumeEducationUserId(resumeEducationId);
+
+    }
+
+
 }

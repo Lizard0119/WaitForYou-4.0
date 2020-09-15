@@ -16,4 +16,7 @@ public interface SocialService {
     int deleteSocialById(Integer socialId);
     //通过社交主页id修改方法
     int updateSocial(Social social);
+    //通过用户id查询社交主页
+    Social findBySocialUserId(Integer socialId);
+
 }

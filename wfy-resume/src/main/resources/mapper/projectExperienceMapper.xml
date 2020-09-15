@@ -33,6 +33,11 @@
             where u.user_id = #{userId}
     </select>
 
+    <!--项目经验的单表查询-->
+    <select id="findByProjectExperienceId" resultMap="ProjectExperienceMap">
+        select * from tb_projectexperience where projectexperience_id = #{projectexperienceId}
+    </select>
+
 
     <!--  项目经验的添加  -->
     <insert id="saveResumeProjectExperience">
@@ -56,7 +61,7 @@
 
     <!--通过项目经验id删除-->
     <delete id="deleteResumeByProjectExperienceId">
-        delete from tb_projectexperience where projectexperience_id = #{certificateId}
+        delete from tb_projectexperience where projectexperience_id = #{projectexperienceId}
     </delete>
 
     <!--通过项目经验id修改-->

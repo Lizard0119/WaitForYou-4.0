@@ -31,6 +31,11 @@
             where u.user_id = #{userId}
     </select>
 
+    <!--  求职意向的单个查询  -->
+    <select id="findByIntentionId" resultMap="IntentionMap">
+        select * from tb_intention where intention_id = #{intentionId}
+    </select>
+
 
     <!--  求职意向的添加  -->
     <insert id="saveResumeIntention">

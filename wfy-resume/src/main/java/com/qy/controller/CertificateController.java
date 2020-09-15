@@ -77,4 +77,11 @@ public class CertificateController {
     }
 
 
+    @RequestMapping("/findByCertificateId/{certificateId}")
+    public Certificate findByCertificateId(@PathVariable("certificateId") Integer certificateId) {
+
+        return certificateService.findByCertificateId(certificateId);
+
+    }
+
 }

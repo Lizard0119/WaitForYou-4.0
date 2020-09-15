@@ -73,4 +73,12 @@ public class IntentionController {
         return 0;
     }
 
+
+    @RequestMapping("/findByIntentionId/{intentionId}")
+    public Intention findByIntentionId(@PathVariable("intentionId") Integer intentionId) {
+
+        return intentionService.findByIntentionId(intentionId);
+
+    }
+
 }

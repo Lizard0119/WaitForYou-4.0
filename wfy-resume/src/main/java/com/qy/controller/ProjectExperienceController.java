@@ -71,5 +71,12 @@ public class ProjectExperienceController {
         return 0;
     }
 
+    @RequestMapping("/findByProjectExperienceId/{projectExperienceId}")
+    public ProjectExperience findByProjectExperienceId(@PathVariable("projectExperienceId") Integer projectExperienceId) {
+
+        return projectExperienceService.findByProjectExperienceId(projectExperienceId);
+
+    }
+
 
 }

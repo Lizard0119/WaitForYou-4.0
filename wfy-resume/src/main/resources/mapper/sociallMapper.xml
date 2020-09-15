@@ -27,6 +27,13 @@
             where u.user_id = #{userId}
     </select>
 
+    <select id="findBySocialUserId" resultMap="socialMap">
+
+        select * from tb_social
+         where social_id=#{socialId}
+    </select>
+
+
 
     <insert id="saveResumeSocial" useGeneratedKeys="true" keyProperty="socialId">
     insert into tb_social

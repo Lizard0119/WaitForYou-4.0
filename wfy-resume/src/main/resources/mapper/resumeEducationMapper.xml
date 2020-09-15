@@ -32,6 +32,12 @@
             where u.user_id = #{userId}
     </select>
 
+    <select id="findByResumeEducationUserId" resultMap="resumeEducationMap">
+
+        select * from tb_resumeeducation
+         where resumeeducation_id=#{resumeeducationId}
+   </select>
+
 
     <insert id="saveResumeEducation" useGeneratedKeys="true" keyProperty="resumeEducationId">
     insert into tb_resumeeducation

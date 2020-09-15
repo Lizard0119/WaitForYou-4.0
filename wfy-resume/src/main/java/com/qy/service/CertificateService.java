@@ -16,4 +16,7 @@ public interface CertificateService {
     Integer saveResumeCertificate(Certificate certificate);
     //删除资格证书
     Integer deleteResumeByCertificateId(Integer certificateId);
+    //查询单个资格证书
+    Certificate findByCertificateId(Integer certificateId);
+
 }

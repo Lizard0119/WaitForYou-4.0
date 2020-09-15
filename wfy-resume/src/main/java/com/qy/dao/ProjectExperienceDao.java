@@ -17,5 +17,8 @@ public interface ProjectExperienceDao {
     //添加新的项目经验表
     Integer saveResumeProjectExperience(ProjectExperience projectExperience);
     //删除项目经验表
-    Integer deleteResumeByProjectExperienceId(Integer certificateId);
+    Integer deleteResumeByProjectExperienceId(Integer projectExperienceId);
+    //查询单个项目经验表
+    ProjectExperience findByProjectExperienceId(Integer projectExperienceId);
+
 }
