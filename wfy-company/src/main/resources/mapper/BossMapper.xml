@@ -15,4 +15,12 @@
     <insert id="createBoss">
         insert into tb_boss values (null,#{bossName},#{bossSex},#{bossPhone},#{bossCompanyId});
     </insert>
+
+    <insert id="inviteJob">
+        insert into tb_job (job_id,job_name,job_pay) values (null,#{jobName},#{jobPay})
+    </insert>
+
+    <insert id="bossJob">
+        insert into  tb_boss_job values (#{bid},#{jid});
+    </insert>
 </mapper>

@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Param;
 public interface SendResumeDao {
     //往 简历-HR（BOSS）表 插入
 //    int insertWithResumeAndBoss(@Param("resumeId") int resid, @Param("bossId") int bossid);
-    //往 简历-招聘信息(job)表 插入
+    //往 简历-招聘信息(Job)表 插入
 //    int insertWithResumeAndJob(@Param("resumeId") int resid,@Param("jobId") int jobid);
     //通过job表 找到 HR id
 //    Boss selectByJobId(@Param("jobId") int jobid);
