@@ -6,8 +6,10 @@ import com.qy.pojo.search.JobFirst;
 import com.qy.pojo.search.JobSecond;
 import com.qy.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,6 +18,8 @@ public class JobServiceImpl implements JobService {
     @Autowired
     JobDao jobDao;
 
+    @Autowired
+    RedisTemplate redisTemplate;
 
     @Override
     public BaseResp findAllJobFirst() {
@@ -73,21 +77,42 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public BaseResp findAllJobSecond() {
-        List<JobSecond> allJobSecond = jobDao.findAllJobSecond();
-        BaseResp baseResp = new BaseResp();
-
-        if (!allJobSecond.isEmpty()) {
-            baseResp.setList(allJobSecond);
-            baseResp.setCode(200);
-            baseResp.setMessage("查询成功");
-            baseResp.setTotal((long) allJobSecond.size());
-            return baseResp;
+    public BaseResp findAllJobSecond(Integer page, Integer size) {
+//        List<JobSecond> allJobSecond = jobDao.findAllJobSecond();
+//        BaseResp baseResp = new BaseResp();
+//
+//        if (!allJobSecond.isEmpty()) {
+//            baseResp.setList(allJobSecond);
+//            baseResp.setCode(200);
+//            baseResp.setMessage("查询成功");
+//            baseResp.setTotal((long) allJobSecond.size());
+//            return baseResp;
+//        } else {
+//            baseResp.setMessage("查询失败");
+//            return baseResp;
+//        }
+        Boolean secondList = redisTemplate.hasKey("secondList");
+        List secondList1 = new ArrayList();
+        Integer start = (page - 1) * size;
+        Long total;
+        if (secondList) {
+            System.out.println("从redis中进行获取");
+            secondList1 = redisTemplate.opsForList().range("secondList", start, start + size);
+            total = redisTemplate.opsForList().size("secondList");
         } else {
-            baseResp.setMessage("查询失败");
-            return baseResp;
+            System.out.println("从数据库查询数据");
+            List<JobSecond> allJobSecond = jobDao.findAllJobSecond();
+            for (JobSecond js : allJobSecond
+            ) {
+                redisTemplate.opsForList().rightPush("secondList", js);
+            }
+            secondList1 = redisTemplate.opsForList().range("secondList", start, start + size);
+            total = redisTemplate.opsForList().size("secondList");
         }
-
+        BaseResp baseResp = new BaseResp();
+        baseResp.setList(secondList1);
+        baseResp.setTotal(total);
+        return baseResp;
     }
 
     @Override

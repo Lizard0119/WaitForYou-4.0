@@ -47,9 +47,9 @@ public class JobController {
     }
 
     //job第2分类查询所有
-    @RequestMapping("/findAllSecondJob")
-    public BaseResp findAllSecondJob() {
-        return jobService.findAllJobSecond();
+    @RequestMapping("/findAllSecondJob/{page}/{size}")
+    public BaseResp findAllSecondJob(@PathVariable("page") Integer page, @PathVariable("size") Integer size) {
+        return jobService.findAllJobSecond(page, size);
     }
 
     //job第2分类按id查
