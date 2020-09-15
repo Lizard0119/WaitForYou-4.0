@@ -12,5 +12,5 @@ public interface SendResumeService {
    //通过job表 找到 HR id
 //   Boss selectByJobId( int jobid);
    //用户与招聘信息表关联
-   int insertWithUserAndJob(int userid,int jobid);
+   int insertWithUserAndJob(int jobid,int userid);
 }

@@ -17,6 +17,6 @@ public interface SendResumeDao {
 //    Boss selectByJobId(@Param("jobId") int jobid);
 
     //用户与招聘信息表关联
-    int insertWithUserAndJob(@Param("userid")int userid,@Param("jobId") int jobid);
-
+//    int insertWithUserAndJob(@Param("userid")int userid,@Param("jobId") int jobid);
+    int insertWithUserAndJob(@Param("jobid")int jobid, @Param("userid")int userid);
 }

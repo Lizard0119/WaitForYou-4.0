@@ -17,7 +17,7 @@ public class SendResumeServiceImpl implements SendResumeService {
   private SendResumeDao sendResumeDao;
 
     @Override
-    public int insertWithUserAndJob(int userid, int jobid) {
-        return sendResumeDao.insertWithUserAndJob(userid, jobid);
+    public int insertWithUserAndJob(int jobid,int userid) {
+        return sendResumeDao.insertWithUserAndJob(jobid,userid);
     }
 }
