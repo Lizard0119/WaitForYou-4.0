@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qy.dao.CheckResumeDao">
+    <resultMap id="CheckAll" type="com.qy.pojo.sendresume.UserAndJob">
+        <result column="user_id" property="userid"/>
+        <result column="username" property="username"/>
+        <result column="user_job_state" property="userJobState"/>
+        <result column="job_name" property="jobname"/>
+        <result column="boss_name" property="bossname"/>
+    </resultMap>
+    <select id="selectResumeByJob" resultMap="CheckAll">
+        SELECT tbu.user_id,tbu.username,tbu.user_job_state,tj.job_name,tb.boss_name FROM tb_user tbu
+INNER JOIN  tb_user_job tuj ON tuj.user_id = tbu.user_id
+INNER JOIN tb_job tj ON tj.job_id = tuj.job_id
+INNER JOIN tb_boss_job tbj ON tbj.job_id = tj.job_id
+INNER JOIN tb_boss tb ON tb.boss_id = tbj.boss_id
+WHERE tj.job_id =#{jobid}
+    </select>
+
+    <delete id="deleteResumeByUserId">
+        delete FROM tb_user_job where tb_user_job.user_id = #{userid}
+    </delete>
+</mapper>
