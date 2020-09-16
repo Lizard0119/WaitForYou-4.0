@@ -12,8 +12,8 @@ import java.util.List;
  */
 @Mapper
 public interface CheckResumeDao {
-    //查 招聘信息 下 的所有简历
+    //HR 查 招聘信息 下 的所有简历
     List<UserAndJob> selectResumeByJob(@Param("jobid") int jobid);
-    //删除简历
+    //HR 删除简历
     int deleteResumeByUserId(@Param("userid")int userid);
 }
