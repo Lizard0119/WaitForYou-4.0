@@ -2,6 +2,7 @@ package com.qy.service.impl;
 
 import com.qy.dao.JobDao;
 import com.qy.pojo.search.BaseResp;
+import com.qy.pojo.search.Company2Job;
 import com.qy.pojo.search.JobFirst;
 import com.qy.pojo.search.JobSecond;
 import com.qy.service.JobService;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class JobServiceImpl implements JobService {
@@ -93,12 +95,17 @@ public class JobServiceImpl implements JobService {
 //        }
         Boolean secondList = redisTemplate.hasKey("secondList");
         List secondList1 = new ArrayList();
+        BaseResp baseResp = new BaseResp();
         Integer start = (page - 1) * size;
         Long total;
         if (secondList) {
             System.out.println("从redis中进行获取");
             secondList1 = redisTemplate.opsForList().range("secondList", start, start + size);
             total = redisTemplate.opsForList().size("secondList");
+
+            baseResp.setList(secondList1);
+            baseResp.setTotal(total);
+            return baseResp;
         } else {
             System.out.println("从数据库查询数据");
             List<JobSecond> allJobSecond = jobDao.findAllJobSecond();
@@ -108,11 +115,13 @@ public class JobServiceImpl implements JobService {
             }
             secondList1 = redisTemplate.opsForList().range("secondList", start, start + size);
             total = redisTemplate.opsForList().size("secondList");
+            //设置过期时间为30min
+//            redisTemplate.expire("secondList",30, TimeUnit.MINUTES);
+            baseResp.setList(secondList1);
+            baseResp.setTotal(total);
+            return baseResp;
         }
-        BaseResp baseResp = new BaseResp();
-        baseResp.setList(secondList1);
-        baseResp.setTotal(total);
-        return baseResp;
+
     }
 
     @Override
@@ -170,6 +179,18 @@ public class JobServiceImpl implements JobService {
             baseResp.setMessage("查询SecondJob失败");
             return baseResp;
         }
+    }
+
+    @Override
+    public BaseResp findJopByCompanyId(Integer companyId) {
+        List<Company2Job> jopByCompanyId = jobDao.findJopByCompanyId(companyId);
+        BaseResp baseResp = new BaseResp();
+        baseResp.setList(jopByCompanyId);
+        baseResp.setCode(200);
+        baseResp.setTotal((long) jopByCompanyId.size());
+        baseResp.setMessage("本次通过公司查询职位");
+
+        return baseResp;
     }
 
 

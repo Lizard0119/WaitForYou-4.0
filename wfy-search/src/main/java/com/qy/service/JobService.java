@@ -1,8 +1,11 @@
 package com.qy.service;
 
 import com.qy.pojo.search.BaseResp;
+import com.qy.pojo.search.Company2Job;
 import com.qy.pojo.search.JobFirst;
 import com.qy.pojo.search.JobSecond;
+
+import java.util.List;
 
 public interface JobService {
     // job的第一分类CRUD
@@ -29,4 +32,7 @@ public interface JobService {
 
     //两个分类联查,返回所查第一分类下的第二分类职务list
     BaseResp findByFirstAndSecondJob(Integer jobTableFid);
+
+    //通过公司查职位
+    BaseResp findJopByCompanyId(Integer companyId);
 }

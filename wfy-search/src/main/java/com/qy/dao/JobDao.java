@@ -1,5 +1,6 @@
 package com.qy.dao;
 
+import com.qy.pojo.search.Company2Job;
 import com.qy.pojo.search.JobFirst;
 import com.qy.pojo.search.JobSecond;
 import org.apache.ibatis.annotations.Mapper;
@@ -33,4 +34,7 @@ public interface JobDao {
 
     //两个分类联查,返回所查第一分类下的第二分类职务list
     List<JobSecond> findByFirstAndSecondJob(Integer jobTableFid);
+
+    //通过公司查职位
+    List<Company2Job> findJopByCompanyId(Integer companyId);
 }
