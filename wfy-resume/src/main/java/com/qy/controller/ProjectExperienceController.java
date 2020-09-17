@@ -39,7 +39,7 @@ public class ProjectExperienceController {
     @RequestMapping("/saveResumeProjectExperience/{userId}")
     public Integer saveResumeProjectExperience(@RequestBody Map map, @PathVariable("userId")Integer userId) {
 
-        int projectExperienceId = Integer.parseInt(map.get("projectExperienceId").toString());
+        //int projectExperienceId = Integer.parseInt(map.get("projectExperienceId").toString());
         String projectExperienceName = map.get("projectExperienceName").toString();
         String projectExperienceRole = map.get("projectExperienceRole").toString();
 
@@ -54,7 +54,7 @@ public class ProjectExperienceController {
         String projectExperienceConnect = map.get("projectExperienceConnect").toString();
 
         ProjectExperience projectExperience = new ProjectExperience
-                (projectExperienceId,projectExperienceName,projectExperienceRole,projectExperienceLastTime,projectExperienceBeforeTime,projectExperienceDescribe,projectExperiencePerformance,projectExperienceConnect);
+                (0,projectExperienceName,projectExperienceRole,projectExperienceLastTime,projectExperienceBeforeTime,projectExperienceDescribe,projectExperiencePerformance,projectExperienceConnect);
 
 
 

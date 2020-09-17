@@ -44,7 +44,7 @@ public class WorkExperienceController {
     public String saveResumeSocial(@RequestBody Map map, @PathVariable("userId") Integer userId){
 
 
-        int workExperienceId = Integer.parseInt(map.get("workExperienceId").toString());
+       // int workExperienceId = Integer.parseInt(map.get("workExperienceId").toString());
 
 
         String workExperienceCompany = map.get("workExperienceCompany").toString();
@@ -63,7 +63,7 @@ public class WorkExperienceController {
         String workExperienceContent = map.get("workExperienceContent").toString();
         String workExperiencePerformance = map.get("workExperiencePerformance").toString();
 
-        WorkExperience workExperience = new WorkExperience(workExperienceId,workExperienceCompany,workExperienceIndustry,workExperienceWorkingTimeBegin,workExperienceWorkingTimeEnd,workExperienceType,workExperienceDepartment,workExperienceContent,workExperiencePerformance);
+        WorkExperience workExperience = new WorkExperience(0,workExperienceCompany,workExperienceIndustry,workExperienceWorkingTimeBegin,workExperienceWorkingTimeEnd,workExperienceType,workExperienceDepartment,workExperienceContent,workExperiencePerformance);
 
 
         if (workExperienceService.saveWorkExperience(workExperience)>0){

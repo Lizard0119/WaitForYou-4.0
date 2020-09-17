@@ -27,7 +27,7 @@ public class SocialController {
     @Autowired
     UserSocialService userSocialService;
 
-    private UserSocial userSocial;
+   // private UserSocial userSocial;
 
     @RequestMapping("/findSocial/{userId}")
     public List<Social> findResumeBySocialUserId(@PathVariable("userId") Integer userId){
@@ -43,8 +43,9 @@ public class SocialController {
            Integer socialId = social.getSocialId();
            System.out.println(socialId);
             //预留关联表增加
-            userSocial.setSocialId(socialId);
-            userSocial.setUserId(userId);
+           UserSocial userSocial = new UserSocial();
+           userSocial.setSocialId(socialId);
+           userSocial.setUserId(userId);
            if (userSocialService.saveUserUserSocial(userSocial)>0){
 
           return "成功";}

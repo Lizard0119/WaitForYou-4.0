@@ -49,7 +49,9 @@
     projectexperience_performance,
     projectexperience_connect,
     projectexperience_beforetime)
-    values ( #{projectexperienceName},
+    values
+    (
+    #{projectExperienceName},
     #{projectExperienceRole},
     #{projectExperienceLastTime},
     #{projectExperienceDescribe},

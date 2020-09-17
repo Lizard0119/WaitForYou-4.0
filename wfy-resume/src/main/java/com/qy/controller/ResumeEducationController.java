@@ -35,7 +35,7 @@ public class ResumeEducationController {
     @Autowired
     UserResumeEducationService userResumeEducationService;
 
-    private UserResumeEducation userResumeEducation;
+   // private UserResumeEducation userResumeEducation;
 
 
     @RequestMapping("/findSocialResumeEducation/{userId}")
@@ -47,7 +47,7 @@ public class ResumeEducationController {
     @RequestMapping("/saveResumeSocial/{userId}")
     public String saveResumeEducation(@RequestBody Map map, @PathVariable("userId") Integer userId){
 
-        int resumeEducationId = Integer.parseInt(map.get("resumeEducationId").toString());
+       // int resumeEducationId = Integer.parseInt(map.get("resumeEducationId").toString());
 
         String resumeEducationSchool = map.get("resumeEducationSchool").toString();
 
@@ -61,15 +61,17 @@ public class ResumeEducationController {
 
         String resumeEducationExperience = map.get("resumeEducationExperience").toString();
 
-        ResumeEducation resumeEducation = new ResumeEducation(resumeEducationId,resumeEducationSchool,resumeEducationBackground,resumeEducationMajor,resumeEducationLastTime,resumeEducationBeforeTime,resumeEducationExperience);
+        ResumeEducation resumeEducation = new ResumeEducation(0,resumeEducationSchool,resumeEducationBackground,resumeEducationMajor,resumeEducationLastTime,resumeEducationBeforeTime,resumeEducationExperience);
 
 
 
         if (resumeEducationService.saveResumeEducation(resumeEducation)>0){
-            Integer socialId = resumeEducation.getResumeEducationId();
+            int resumeEducationId = resumeEducation.getResumeEducationId();
 
+            System.out.println(resumeEducationId);
             //预留关联表增加
-            userResumeEducation.setResumeEducationId(socialId);
+            UserResumeEducation userResumeEducation = new UserResumeEducation();
+            userResumeEducation.setResumeEducationId(resumeEducationId);
             userResumeEducation.setUserId(userId);
            if (userResumeEducationService.saveUserResumeEducation(userResumeEducation)>0){
 
