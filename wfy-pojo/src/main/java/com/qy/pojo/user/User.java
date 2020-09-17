@@ -15,7 +15,7 @@ public class User {
     private String password;
     private String username;
     private int userSex;
-    private String userIdentity;// 用户身份 求职者/boss
+    private int userIdentity;// 用户身份 求职者/boss
     private String userAvatar;
     private Date userBirthday;
     private int userPoliyicsStatus;//政治面貌

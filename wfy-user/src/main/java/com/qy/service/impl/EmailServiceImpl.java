@@ -19,10 +19,10 @@ public class EmailServiceImpl implements EmailService {
     RabbitTemplate rabbitTemplate;
 
     @Override
-    public String sendMail(String email) {
+    public String sendMail(String userEmail) {
 
         //去数据库检验，是否唯一
-        User byUsername = userDao.findByUsername(email);
+        User byUsername = userDao.findByUsername(userEmail);
 
         if (byUsername != null){
             return "用户邮箱已注册";
@@ -39,7 +39,7 @@ public class EmailServiceImpl implements EmailService {
 //            javaMailSender.send(simpleMailMessage);
 //            redisUtil.set(mail,i,30*60);
             Map map = new HashMap<>();
-            map.put("email",email);
+            map.put("userEmail",userEmail);
             rabbitTemplate.convertAndSend("wfy-email",map);
             return "发送成功";
     }

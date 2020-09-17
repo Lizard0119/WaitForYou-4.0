@@ -9,10 +9,34 @@
         xml中的每个节点的id必须为接口的方法名
 -->
 <mapper namespace="com.qy.dao.IUserDao">
-<!--    <resultMap type="com.qy.pojo.user.User" id="Register">-->
-<!--        <result property="userEmail" column="user_email" jdbcType="VARCHAR"/>-->
-<!--    </resultMap>-->
+    <resultMap id="getUserByIdMap" type="com.qy.pojo.user.User">
+        <id property="userid" column="user_id" />
+        <result property="userEmail" column="user_email" />
+        <result property="userSex" column="user_sex" />
+        <result property="userIdentity" column="user_identity" />
+        <result property="userAvatar" column="user_avatar" />
+        <result property="userBirthday" column="user_birthday" />
+        <result property="userPoliyicsStatus" column="user_politics_status" />
+        <result property="userJobState" column="user_job_state" />
+        <result property="userCreateTime" column="user_create_time" />
+        <result property="userAddress" column="user_address" />
+        <result property="userTel" column="user_tel" />
+    </resultMap>
     <insert id="Register"  parameterType="com.qy.pojo.user.User">
         insert into tb_user(user_id,user_email,password,username) values(#{userid},#{userEmail},#{password},#{username});
     </insert>
+
+    <select id="getUserById" resultMap="getUserByIdMap">
+        select * from tb_user where user_id =#{userid}
+    </select>
+
+    <update id="updateUser" parameterType="user">
+        update tb_user set user_email=#{userEmail},password=#{password},username=#{username},user_sex=#{userSex},user_identity=#{userIdentity},user_avatar=#{userAvatar},
+        user_birthday=#{userBirthday},user_politics_status=#{userPoliyicsStatus},user_job_state=#{userJobState},user_create_time=#{userCreateTime},user_address=#{userAddress},
+        user_tel=#{userTel} where user_id=#{userid}
+    </update>
+
+    <select id="findByUsername" resultMap="getUserByIdMap">
+        select * from tb_user where username= #{username}
+    </select>
 </mapper>

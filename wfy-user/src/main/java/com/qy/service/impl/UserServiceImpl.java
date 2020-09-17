@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -23,23 +25,29 @@ public class UserServiceImpl implements IUserService {
     RedisTemplate redisTemplate;
 
     @Override
-    public String login(User user) {
+    public Map login(User user) {
 
         User byUsername = userDao.findByUsername(user.getUsername());
 
-        if (byUsername == null){
-            return "没有该用户";
-        }else if (! byUsername.getPassword().equals(user.getPassword())){
-            return "密码错误";
-        }
+        Map<String, Object> map = new HashMap<>();
 
+        if (byUsername == null){
+            map.put("message","没有该用户");
+            return map;
+        }else if (! byUsername.getPassword().equals(user.getPassword())){
+            map.put("message","密码错误");
+            return map;
+        }
+        map.put("message","登陆成功");
         String token = UUID.randomUUID().toString();
+        map.put("token",token);
         //以token为key，查询出的用户对象为value存储到redis中
         redisTemplate.opsForValue().set(token,byUsername);
         //设置redis中数据失效的时间
         redisTemplate.expire(token,30, TimeUnit.MINUTES);
-
-        return token;
+        map.put("User",byUsername);
+        System.out.println(map);
+        return map;
     }
 
     @Override
@@ -64,6 +72,23 @@ public class UserServiceImpl implements IUserService {
             }
         }
         return "验证码超时";
+    }
+
+    @Override
+    public User getUserById(int userid) {
+
+        System.out.println(userDao.getUserById(userid));
+        return userDao.getUserById(userid);
+    }
+
+    @Override
+    public String updateUser(User user) {
+        if (userDao.updateUser(user)>0){
+            return "修改成功";
+        }else{
+            return "修改失败";
+        }
+
     }
 
 }

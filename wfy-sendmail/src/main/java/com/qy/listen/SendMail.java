@@ -29,11 +29,11 @@ public class SendMail {
 
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom(from);
-        Object email = map.get("email");
+        Object email = map.get("userEmail");
         simpleMailMessage.setTo(email.toString());
         simpleMailMessage.setSubject("【麻豆服务】注册通知");
         simpleMailMessage.setText("");
-        int i = Integer.parseInt(String.format("%04d", new Random().nextInt(9999)));
+        int i = Integer.parseInt(String.format("%04d", (int)((Math.random()*9+1)*1000)));
         simpleMailMessage.setText("小麻豆提醒您，此次验证码为：" + "\t" + i + "!" + "\n" +"麻豆欢迎你的到来!");
         try {
             javaMailSender.send(simpleMailMessage);

@@ -16,7 +16,7 @@ public class EmailController {
 
     @RequestMapping("/sendMail")
     public String sendMail(@RequestBody Map map){
-        Object email = map.get("email");
+        Object email = map.get("userEmail");
         return emailService.sendMail(email.toString());
     }
 
