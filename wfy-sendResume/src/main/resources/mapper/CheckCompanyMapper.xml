@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qy.dao.CheckCompanyDao">
+    <resultMap id="CheckAll" type="com.qy.pojo.search.Company">
+        <result column="company_id" property="companyId"/>
+        <result column="company_name" property="companyName"/>
+        <result column="company_address" property="companyAddress"/>
+    </resultMap>
+    <select id="selectCompanyByBossid" resultMap="CheckAll">
+      SELECT tbc.company_id,tbc.company_name,tbc.company_address from tb_company tbc
+INNER JOIN tb_boss_company boco ON boco.company_id = tbc.company_id
+INNER JOIN tb_boss bo ON bo.boss_id = boco.boss_id
+WHERE bo.boss_id = #{bossid}
+    </select>
+
+    <delete id="deleteResumeByUserId">
+        delete FROM tb_user_job where tb_user_job.user_id = #{userid}
+    </delete>
+</mapper>
