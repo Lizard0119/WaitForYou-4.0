@@ -1,6 +1,7 @@
 package com.qy.service;
 
 import com.qy.pojo.search.Company;
+import com.qy.pojo.sendresume.CompanyJobHR;
 
 /**
  * @author Hz
@@ -9,4 +10,6 @@ import com.qy.pojo.search.Company;
 
 public interface CheckCompanyService {
    Company selectCompanyByBossid(int bossid);
+
+    CompanyJobHR getcompanyJobHR(int userid);
 }

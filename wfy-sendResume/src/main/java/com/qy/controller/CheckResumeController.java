@@ -29,6 +29,7 @@ public class CheckResumeController {
     public Resume selectByJob(@PathVariable("userid") int userid){
         return checkResumeService.selectResumeByuserId(userid);
     }
+
     //删除简历
     @RequestMapping("/deletebyuserid/{userid}")
     public String deleteByResumeId(@PathVariable("userid") int id){

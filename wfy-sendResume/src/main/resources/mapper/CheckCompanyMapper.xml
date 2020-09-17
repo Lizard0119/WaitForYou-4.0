@@ -7,12 +7,31 @@
         <result column="company_name" property="companyName"/>
         <result column="company_address" property="companyAddress"/>
     </resultMap>
+    <resultMap id="usercheck" type="com.qy.pojo.sendresume.CompanyJobHR">
+        <result column="company_id" property="companyid"/>
+        <result column="company_name" property="companyName"/>
+        <result column="job_name" property="jobName"/>
+        <result column="boss_name" property="bossName"/>
+    </resultMap>
+    <!--hr 查 所属公司-->
     <select id="selectCompanyByBossid" resultMap="CheckAll">
       SELECT tbc.company_id,tbc.company_name,tbc.company_address from tb_company tbc
 INNER JOIN tb_boss_company boco ON boco.company_id = tbc.company_id
 INNER JOIN tb_boss bo ON bo.boss_id = boco.boss_id
 WHERE bo.boss_id = #{bossid}
     </select>
+
+    <!--用户查询投过的公司-->
+    <select id="getcompanyJobHR" resultMap="usercheck">
+    SELECT tbc.company_id,tbc.company_name,jo.job_name,bo.boss_name from tb_company tbc
+INNER JOIN tb_boss_company boco ON boco.company_id = tbc.company_id
+INNER JOIN tb_boss bo ON bo.boss_id = boco.boss_id
+INNER JOIN tb_boss_job bj ON bj.boss_id = bo.boss_id
+INNER JOIN tb_job jo ON jo.job_id = bj.job_id
+INNER JOIN tb_user_job uj ON uj.job_id = jo.job_id
+INNER JOIN tb_user us ON us.user_id = uj.user_id
+WHERE us.user_id = #{userid}
+</select>
 
     <delete id="deleteResumeByUserId">
         delete FROM tb_user_job where tb_user_job.user_id = #{userid}
