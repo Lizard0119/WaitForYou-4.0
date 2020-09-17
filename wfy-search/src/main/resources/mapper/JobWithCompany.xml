@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+  mybatis的第二种事件方式
+    xml + 接口的方式
+      特点：xml中的namespace必须为接口的全路径
+        xml中的每个节点的id必须为接口的方法名
+-->
+<mapper namespace="com.qy.dao.JobDao">
+
+    <resultMap id="jobwithcompanyid" type="Company2Job">
+        <result property="companyId" column="company_id"></result>
+        <result property="jobTableSid" column="jobtable_sid"></result>
+        <result property="jobTabelSecondType" column="jobtabel_secondtype"></result>
+        <result property="jobimg" column="jobimg"></result>
+    </resultMap>
+
+    <select id="findJopByCompanyId" resultMap="jobwithcompanyid">
+        SELECT job.* FROM tb_company company
+            INNER JOIN tb_company_jobtablesecond cj ON company.`company_id`=cj.`company_id`
+            INNER JOIN tb_jobtabelsecond job ON job.`jobtable_sid`=cj.`jobtable_sid`
+            WHERE company.`company_id`=#{companyId};
+    </select>
+
+</mapper>

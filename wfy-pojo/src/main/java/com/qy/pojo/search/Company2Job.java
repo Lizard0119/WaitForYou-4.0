@@ -2,13 +2,11 @@ package com.qy.pojo.search;
 
 import lombok.Data;
 
-/**
- * job第二职位表
- * wwh
- * 2020/9/9
- */
 @Data
-public class JobSecond {
+public class Company2Job {
+    // 公司id
+    //数据库叫  company_id
+    private Integer companyId;
     //职位表二
     //数据库叫 jobtable_sid
     private Integer jobTableSid;

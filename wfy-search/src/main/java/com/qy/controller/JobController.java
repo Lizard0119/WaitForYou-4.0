@@ -16,6 +16,12 @@ public class JobController {
     @Autowired
     JobService jobService;
 
+    //通过公司ID查职位
+    @RequestMapping("/findJobByCompanyId/{companyId}")
+    public BaseResp findJobByCompanyId(@PathVariable("companyId") Integer companyId) {
+        return jobService.findJopByCompanyId(companyId);
+    }
+
     //job第一分类查询所有
     @RequestMapping("/findAllFirstJob")
     public BaseResp findAllFirstJob() {
