@@ -17,4 +17,7 @@ public interface ProjectExperienceService {
     Integer saveResumeProjectExperience(ProjectExperience projectExperience);
     //删除项目经验表
     Integer deleteResumeByProjectExperienceId(Integer projectExperienceId);
+    //查询单个项目经验表
+    ProjectExperience findByProjectExperienceId(Integer projectExperienceId);
+
 }

@@ -18,4 +18,7 @@ public interface IntentionDao {
     Integer saveResumeIntention(Intention intention);
     //删除求职意向
     Integer deleteResumeByIntentionId(Integer intentionId);
+    //查询单个求职意向
+    Intention findByIntentionId(Integer intentionId);
+
 }

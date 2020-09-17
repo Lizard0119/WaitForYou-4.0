@@ -38,4 +38,10 @@ public class ResumeEducationServiceImpl implements ResumeEducationService {
     public int updateResumeEducation(ResumeEducation resumeEducation) {
         return resumeEducationDao.updateResumeEducation(resumeEducation);
     }
+
+    //查询单个教育经历
+    @Override
+    public ResumeEducation findByResumeEducationUserId(Integer resumeEducationId) {
+        return resumeEducationDao.findByResumeEducationUserId(resumeEducationId);
+    }
 }

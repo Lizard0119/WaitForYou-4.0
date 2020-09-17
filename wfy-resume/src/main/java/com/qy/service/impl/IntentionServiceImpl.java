@@ -40,5 +40,11 @@ public class IntentionServiceImpl implements IntentionService {
         return intentionDao.deleteResumeByIntentionId(intentionId);
     }
 
+    //查询单个的求职意向
+    @Override
+    public Intention findByIntentionId(Integer intentionId) {
+        return intentionDao.findByIntentionId(intentionId);
+    }
+
 
 }

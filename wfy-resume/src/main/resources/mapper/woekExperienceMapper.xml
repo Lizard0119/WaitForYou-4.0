@@ -33,6 +33,11 @@
             where u.user_id = #{userId}
     </select>
 
+    <select id="findByWorkExperienceUserId" resultMap="workExperienceMap">
+
+        select * from tb_workexperience
+         where workexperience_id=#{workexperienceId}
+     </select>
 
     <insert id="saveWorkExperience" useGeneratedKeys="true" keyProperty="workExperienceId">
     insert into tb_workexperience
@@ -65,7 +70,7 @@
     workexperience_department=#{workExperienceDepartment},
     workexperience_content=#{workExperienceContent},
     workexperience_performance=#{workExperiencePerformance}
-     where workexperience_id=#{workexperienceId}
+     where workexperience_id=#{workExperienceId}
     </update>
 
     <delete id="deleteWorkExperienceById"  >

@@ -15,4 +15,7 @@ public interface ResumeEducationService {
     int deleteResumeEducationById(Integer resumeEducationId);
     //通过教育经历id修改方法
     int updateResumeEducation(ResumeEducation resumeEducation);
+    //通过用户id查询教育经历
+    ResumeEducation findByResumeEducationUserId(Integer resumeEducationId);
+
 }

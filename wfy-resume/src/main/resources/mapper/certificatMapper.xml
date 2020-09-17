@@ -27,9 +27,14 @@
             where u.user_id = #{userId}
     </select>
 
+    <!--  资格证书的单个查询  -->
+    <select id="findByCertificateId" resultMap="CertificateMap">
+        select * from tb_certificate where certificate_id = #{certificateId}
+    </select>
+
 
     <!--  资格证书的添加  -->
-    <insert id="saveResumeCertificate">
+    <insert id="saveResumeCertificate" useGeneratedKeys="true" keyProperty="certificateId">
     insert into tb_certificate (certificate_name)
     values ( #{certificateName} )
     </insert>

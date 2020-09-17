@@ -37,4 +37,10 @@ public class SocialServiceImpl implements SocialService {
     public int updateSocial(Social social) {
         return socialDao.updateSocial(social);
     }
+
+    //查询单个社交主页
+    @Override
+    public Social findBySocialUserId(Integer socialId) {
+        return socialDao.findBySocialUserId(socialId);
+    }
 }

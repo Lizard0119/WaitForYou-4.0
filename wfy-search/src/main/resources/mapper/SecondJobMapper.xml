@@ -13,6 +13,7 @@
     <resultMap id="secondjob" type="JobSecond">
         <id property="jobTableSid" column="jobtable_sid"></id>
         <result property="jobTabelSecondType" column="jobtabel_secondtype"></result>
+        <result property="jobimg" column="jobimg"></result>
     </resultMap>
 
     <select id="findAllJobSecond" resultMap="secondjob">

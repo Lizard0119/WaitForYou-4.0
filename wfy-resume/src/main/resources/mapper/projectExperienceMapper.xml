@@ -33,9 +33,14 @@
             where u.user_id = #{userId}
     </select>
 
+    <!--项目经验的单表查询-->
+    <select id="findByProjectExperienceId" resultMap="ProjectExperienceMap">
+        select * from tb_projectexperience where projectexperience_id = #{projectExperienceId}
+    </select>
+
 
     <!--  项目经验的添加  -->
-    <insert id="saveResumeProjectExperience">
+    <insert id="saveResumeProjectExperience" useGeneratedKeys="true" keyProperty="projectExperienceId">
     insert into tb_projectexperience
     (projectexperience_name,
     projectexperience_role,
@@ -45,29 +50,29 @@
     projectexperience_connect,
     projectexperience_beforetime)
     values ( #{projectexperienceName},
-    #{projectexperienceRole},
-    #{projectexperienceLasttime},
-    #{projectexperienceDescribe},
-    #{projectexperiencePerformance},
-    #{projectexperienceConnect},
-    #{projectexperienceBeforetime} )
+    #{projectExperienceRole},
+    #{projectExperienceLastTime},
+    #{projectExperienceDescribe},
+    #{projectExperiencePerformance},
+    #{projectExperienceConnect},
+    #{projectExperienceBeforeTime} )
     </insert>
 
 
     <!--通过项目经验id删除-->
     <delete id="deleteResumeByProjectExperienceId">
-        delete from tb_projectexperience where projectexperience_id = #{certificateId}
+        delete from tb_projectexperience where projectexperience_id = #{projectExperienceId}
     </delete>
 
     <!--通过项目经验id修改-->
     <update id="updateResumeByProjectExperienceId">
-        update tb_projectexperience  set projectexperience_name=#{projectexperienceName},
-            projectexperience_role=#{projectexperienceRole},
-            projectexperience_lasttime=#{projectexperienceLasttime},
-            projectexperience_describe=#{projectexperienceDescribe},
-            projectexperience_performance=#{projectexperiencePerformance},
-            projectexperience_connect=#{projectexperienceConnect},
-            projectexperience_beforetime=#{projectexperienceBeforetime}
+        update tb_projectexperience  set projectexperience_name=#{projectExperienceName},
+            projectexperience_role=#{projectExperienceRole},
+            projectexperience_lasttime=#{projectExperienceLastTime},
+            projectexperience_describe=#{projectExperienceDescribe},
+            projectexperience_performance=#{projectExperiencePerformance},
+            projectexperience_connect=#{projectExperienceConnect},
+            projectexperience_beforetime=#{projectExperienceBeforeTime}
         where projectexperience_id = #{projectExperienceId}
     </update>
 

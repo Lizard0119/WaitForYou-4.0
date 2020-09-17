@@ -32,6 +32,12 @@
             where u.user_id = #{userId}
     </select>
 
+    <select id="findByResumeEducationUserId" resultMap="resumeEducationMap">
+
+        select * from tb_resumeeducation
+         where resumeeducation_id=#{resumeEducationId}
+   </select>
+
 
     <insert id="saveResumeEducation" useGeneratedKeys="true" keyProperty="resumeEducationId">
     insert into tb_resumeeducation
@@ -52,20 +58,20 @@
 
     <update id="updateResumeEducation" >
     update tb_resumeeducation set
-    resumeeducation_school=#{resumeEducationSchool},
-    resumeeducation_background=#{resumeEducationBackground},
-    resumeeducation_major=#{resumeEducationMajor},
-    resumeeducation_lasttime=#{resumeEducationLastTime},
-    resumeeducation_beforetime=#{resumeEducationBeforeTime},
-    resumeeducation_experience=#{resumeEducationExperience},
+    resumeeducation_school= #{resumeEducationSchool},
+    resumeeducation_background= #{resumeEducationBackground},
+    resumeeducation_major= #{resumeEducationMajor},
+    resumeeducation_lasttime= #{resumeEducationLastTime},
+    resumeeducation_beforetime= #{resumeEducationBeforeTime},
+    resumeeducation_experience= #{resumeEducationExperience}
 
-     where resumeeducation_id=#{resumeeducationId}
+     where resumeeducation_id= #{resumeEducationId}
     </update>
 
     <delete id="deleteResumeEducationById"  >
 
         delete from tb_resumeeducation
-         where resumeeducation_id=#{resumeeducationId}
+         where resumeeducation_id=#{resumeEducationId}
     </delete>
 
 

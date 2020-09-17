@@ -39,4 +39,10 @@ public class ProjectExperienceImpl implements ProjectExperienceService {
         return projectExperienceDao.deleteResumeByProjectExperienceId(certificateId);
     }
 
+    //查询单个的项目经验表
+    @Override
+    public ProjectExperience findByProjectExperienceId(Integer projectExperienceId) {
+        return projectExperienceDao.findByProjectExperienceId(projectExperienceId);
+    }
+
 }

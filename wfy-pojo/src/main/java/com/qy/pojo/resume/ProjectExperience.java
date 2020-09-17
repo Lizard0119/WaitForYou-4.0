@@ -1,12 +1,16 @@
 package com.qy.pojo.resume;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 //项目经验
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProjectExperience {
 
     //项目经验id

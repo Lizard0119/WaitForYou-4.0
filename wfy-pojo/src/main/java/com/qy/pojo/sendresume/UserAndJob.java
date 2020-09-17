@@ -1,7 +1,5 @@
 package com.qy.pojo.sendresume;
 
-import lombok.Data;
-
 /**
  * @author Hz
  * 2020/9/11
@@ -9,33 +7,65 @@ import lombok.Data;
  *
  * 简历 职位 关联表
  */
-@Data
-public class UserAndJob {
-    private int userId;
-    private int jobId;
 
+public class UserAndJob {
+
+
+    private int userid;
+    private String username;
+    private int userJobState;
+    private String jobname;
+    private String bossname;
 
     public int getUserId() {
-        return userId;
+        return userid;
     }
 
     public void setUserId(int userId) {
-        this.userId = userId;
+        this.userid = userId;
     }
 
-    public int getJobId() {
-        return jobId;
+
+    public String getUsername() {
+        return username;
     }
 
-    public void setJobId(int jobId) {
-        this.jobId = jobId;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public int getUserJobState() {
+        return userJobState;
+    }
+
+    public void setUserJobState(int userJobState) {
+        this.userJobState = userJobState;
+    }
+
+    public String getJobname() {
+        return jobname;
+    }
+
+    public void setJobname(String jobname) {
+        this.jobname = jobname;
+    }
+
+    public String getBossname() {
+        return bossname;
+    }
+
+    public void setBossname(String bossname) {
+        this.bossname = bossname;
     }
 
     public UserAndJob() {
     }
 
-    public UserAndJob(int userId, int jobId) {
-        this.userId = userId;
-        this.jobId = jobId;
+    public UserAndJob(int userId, String username, int userJobState, String jobname, String bossname) {
+        this.userid = userId;
+        this.username = username;
+        this.userJobState = userJobState;
+        this.jobname = jobname;
+        this.bossname = bossname;
     }
 }

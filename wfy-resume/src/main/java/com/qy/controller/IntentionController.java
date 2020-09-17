@@ -1,20 +1,15 @@
 package com.qy.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.qy.pojo.resume.Intention;
 import com.qy.pojo.resume.UserIntention;
-import com.qy.pojo.user.User;
 import com.qy.service.IntentionService;
 import com.qy.service.UserIntentionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -56,6 +51,7 @@ public class IntentionController {
     @RequestMapping("/updateResumeByIntentionId")
     public Integer updateResumeByIntentionId(@RequestBody Intention intention) {
 
+
         if ( intentionService.updateResumeByIntentionId(intention)>0){
             return 1;
         }
@@ -71,6 +67,14 @@ public class IntentionController {
             }
         }
         return 0;
+    }
+
+
+    @RequestMapping("/findByIntentionId/{intentionId}")
+    public Intention findByIntentionId(@PathVariable("intentionId") Integer intentionId) {
+
+        return intentionService.findByIntentionId(intentionId);
+
     }
 
 }

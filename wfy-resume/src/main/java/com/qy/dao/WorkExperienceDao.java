@@ -17,5 +17,8 @@ public interface WorkExperienceDao {
     //通过工作经历id工作经历修改方法
     int updateWorkExperience(WorkExperience workExperience);
 
+    //通过查询单个工作经历
+    WorkExperience findByWorkExperienceUserId(Integer workExperienceId);
+
 
 }

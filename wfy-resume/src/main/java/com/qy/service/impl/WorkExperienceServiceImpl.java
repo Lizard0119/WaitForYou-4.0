@@ -37,4 +37,10 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
     public int updateWorkExperience(WorkExperience workExperience) {
         return workExperienceDao.updateWorkExperience(workExperience);
     }
+
+    //查询单个工作经历
+    @Override
+    public WorkExperience findByWorkExperienceUserId(Integer workExperienceId) {
+        return workExperienceDao.findByWorkExperienceUserId(workExperienceId);
+    }
 }

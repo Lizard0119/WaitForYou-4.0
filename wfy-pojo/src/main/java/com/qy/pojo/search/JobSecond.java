@@ -15,4 +15,6 @@ public class JobSecond {
     //职位表二类型
     //数据库叫 jobtabel_secondtype
     private String jobTabelSecondType;
+    //jobimg
+    private String jobimg;
 }

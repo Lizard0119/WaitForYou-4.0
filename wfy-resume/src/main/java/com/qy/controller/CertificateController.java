@@ -1,20 +1,16 @@
 package com.qy.controller;
 
-import com.alibaba.fastjson.JSONObject;
+
 import com.qy.pojo.resume.Certificate;
 import com.qy.pojo.resume.UserCertificate;
-import com.qy.pojo.user.User;
 import com.qy.service.CertificateService;
 import com.qy.service.UserCertificateService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -30,6 +26,7 @@ public class CertificateController {
 
     @RequestMapping("/findResumeByCertificateId/{userId}")
     public List<Certificate> findResumeByCertificateId(@PathVariable("userId") Integer userId) {
+        System.out.println(userId);
 
         return certificateService.findResumeByCertificateId(userId);
     }
@@ -76,5 +73,12 @@ public class CertificateController {
         return 0;
     }
 
+
+    @RequestMapping("/findByCertificateId/{certificateId}")
+    public Certificate findByCertificateId(@PathVariable("certificateId") Integer certificateId) {
+
+        return certificateService.findByCertificateId(certificateId);
+
+    }
 
 }
