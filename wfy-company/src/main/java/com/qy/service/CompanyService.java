@@ -6,4 +6,5 @@ public interface CompanyService {
 
     String insertCompany(Company company);
 
+    Integer findCid(Integer bid);
 }
