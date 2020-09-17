@@ -7,6 +7,7 @@ import com.qy.pojo.resume.WorkExperience;
 import com.qy.pojo.user.User;
 import com.qy.service.UserWorkExperienceService;
 import com.qy.service.WorkExperienceService;
+import com.qy.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 
 @RequestMapping("/workExperience")
@@ -38,7 +41,29 @@ public class WorkExperienceController {
 
 
     @RequestMapping("/saveWorkExperience/{userId}")
-    public String saveResumeSocial(@RequestBody WorkExperience workExperience, @PathVariable("userId") Integer userId){
+    public String saveResumeSocial(@RequestBody Map map, @PathVariable("userId") Integer userId){
+
+
+        int workExperienceId = Integer.parseInt(map.get("workExperienceId").toString());
+
+
+        String workExperienceCompany = map.get("workExperienceCompany").toString();
+
+        String workExperienceIndustry = map.get("workExperienceIndustry").toString();
+
+        Date workExperienceWorkingTimeBegin = DateUtil.strToUtilDate(map.get("workExperienceWorkingTimeBegin").toString());
+
+        Date workExperienceWorkingTimeEnd = DateUtil.strToUtilDate(map.get("workExperienceWorkingTimeEnd").toString());
+
+        String workExperienceType = map.get("workExperienceType").toString();
+
+
+        String workExperienceDepartment = map.get("workExperienceDepartment").toString();
+
+        String workExperienceContent = map.get("workExperienceContent").toString();
+        String workExperiencePerformance = map.get("workExperiencePerformance").toString();
+
+        WorkExperience workExperience = new WorkExperience(workExperienceId,workExperienceCompany,workExperienceIndustry,workExperienceWorkingTimeBegin,workExperienceWorkingTimeEnd,workExperienceType,workExperienceDepartment,workExperienceContent,workExperiencePerformance);
 
 
         if (workExperienceService.saveWorkExperience(workExperience)>0){
@@ -57,7 +82,28 @@ public class WorkExperienceController {
 
 
     @RequestMapping("/updateWorkExperience")
-    public String updateWorkExperience(@RequestBody WorkExperience workExperience){
+    public String updateWorkExperience(@RequestBody Map map){
+
+        int workExperienceId = Integer.parseInt(map.get("workExperienceId").toString());
+
+
+        String workExperienceCompany = map.get("workExperienceCompany").toString();
+
+        String workExperienceIndustry = map.get("workExperienceIndustry").toString();
+
+        Date workExperienceWorkingTimeBegin = DateUtil.strToUtilDate(map.get("workExperienceWorkingTimeBegin").toString());
+
+        Date workExperienceWorkingTimeEnd = DateUtil.strToUtilDate(map.get("workExperienceWorkingTimeEnd").toString());
+
+        String workExperienceType = map.get("workExperienceType").toString();
+
+
+        String workExperienceDepartment = map.get("workExperienceDepartment").toString();
+
+        String workExperienceContent = map.get("workExperienceContent").toString();
+        String workExperiencePerformance = map.get("workExperiencePerformance").toString();
+
+        WorkExperience workExperience = new WorkExperience(workExperienceId,workExperienceCompany,workExperienceIndustry,workExperienceWorkingTimeBegin,workExperienceWorkingTimeEnd,workExperienceType,workExperienceDepartment,workExperienceContent,workExperiencePerformance);
         if ( workExperienceService.updateWorkExperience(workExperience)>0){
             return "成功";
         }

@@ -34,7 +34,7 @@
 
 
     <!--  资格证书的添加  -->
-    <insert id="saveResumeCertificate">
+    <insert id="saveResumeCertificate" useGeneratedKeys="true" keyProperty="certificateId">
     insert into tb_certificate (certificate_name)
     values ( #{certificateName} )
     </insert>

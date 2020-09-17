@@ -4,11 +4,14 @@ package com.qy.controller;
 import com.qy.pojo.resume.Certificate;
 import com.qy.pojo.resume.Resume;
 import com.qy.service.*;
+import com.qy.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -40,6 +43,12 @@ public class ResumeController {
         resume.setResumeEducation(resumeEducationService.findResumeByResumeEducationUserId(userId));
         resume.setSocial(socialService.findResumeBySocialUserId(userId));
         resume.setWorkExperience(workExperienceService.findResumeByWorkExperienceUserId(userId));
+        System.out.println(1);
         return resume;
+    }
+
+    @GetMapping("/formatDate/{datetime}")
+    public String formatDate(@PathVariable("datetime") Date date) {
+        return DateUtil.toStr(date);
     }
 }

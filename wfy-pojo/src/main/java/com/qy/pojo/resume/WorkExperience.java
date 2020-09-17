@@ -1,11 +1,15 @@
 package com.qy.pojo.resume;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 //工作经历表
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class WorkExperience {
 
     //工作经历id

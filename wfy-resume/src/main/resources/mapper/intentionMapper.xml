@@ -38,7 +38,7 @@
 
 
     <!--  求职意向的添加  -->
-    <insert id="saveResumeIntention">
+    <insert id="saveResumeIntention" useGeneratedKeys="true" keyProperty="intentionId">
     insert into tb_intention (intention_status, intention_position,
     intention_business, intention_city, intention_personally)
     values ( #{intentionStatus}, #{intentionPosition},
@@ -54,7 +54,7 @@
     <!--通过求职意向id修改-->
     <update id="updateResumeByIntentionId">
         update tb_intention  set intention_status=#{intentionStatus}, intention_position=#{intentionPosition},
-     intention_business=#{intentionBusiness}, #{intentionCity}, #{intentionPersonally} where intention_id = #{intentionId}
+     intention_business=#{intentionBusiness}, intention_city=#{intentionCity}, intention_personally=#{intentionPersonally} where intention_id = #{intentionId}
     </update>
 
 </mapper>

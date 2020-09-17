@@ -70,7 +70,7 @@
     workexperience_department=#{workExperienceDepartment},
     workexperience_content=#{workExperienceContent},
     workexperience_performance=#{workExperiencePerformance}
-     where workexperience_id=#{workexperienceId}
+     where workexperience_id=#{workExperienceId}
     </update>
 
     <delete id="deleteWorkExperienceById"  >

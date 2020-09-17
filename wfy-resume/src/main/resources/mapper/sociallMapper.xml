@@ -44,7 +44,7 @@
 
     <update id="updateSocial" >
     update tb_social set
-    social_name=#{socialName},
+    social_name=#{socialName}
      where social_id=#{socialId}
     </update>
 
