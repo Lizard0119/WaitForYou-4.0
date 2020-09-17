@@ -17,6 +17,14 @@ INNER JOIN tb_boss_job tbj ON tbj.job_id = tj.job_id
 INNER JOIN tb_boss tb ON tb.boss_id = tbj.boss_id
 WHERE tj.job_id =#{jobid}
     </select>
+    <select id="selectResumeByBoss" resultMap="CheckAll">
+SELECT tbu.user_id,tbu.username,tbu.user_job_state,job.job_name FROM tb_user tbu
+INNER JOIN tb_user_job tuj ON tuj.user_id = tbu.user_id
+INNER JOIN tb_job job ON job.job_id = tuj.job_id
+INNER JOIN tb_boss_job bj ON bj.job_id = job.job_id
+INNER JOIN tb_boss bo ON bo.boss_id = bj.boss_id
+WHERE bo.boss_id = #{bossid}
+    </select>
 
     <delete id="deleteResumeByUserId">
         delete FROM tb_user_job where tb_user_job.user_id = #{userid}
