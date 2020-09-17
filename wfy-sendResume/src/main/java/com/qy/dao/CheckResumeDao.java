@@ -16,4 +16,6 @@ public interface CheckResumeDao {
     List<UserAndJob> selectResumeByJob(@Param("jobid") int jobid);
     //HR 删除简历
     int deleteResumeByUserId(@Param("userid")int userid);
+    //查 该HR下 所有 用户
+    List<UserAndJob> selectResumeByBoss(@Param("bossid") Integer bossid);
 }
