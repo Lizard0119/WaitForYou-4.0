@@ -4,10 +4,12 @@ import com.qy.pojo.job.Job;
 import com.qy.pojo.user.Boss;
 import com.qy.service.BossService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -30,7 +32,16 @@ public class BossController {
     public String bossJob(@RequestBody Map map) {
         Integer bid = (Integer) map.get("bid");
         Integer jid = (Integer) map.get("jid");
-
         return service.bossJob(bid, jid);
+    }
+
+    @RequestMapping("/searchAllMyJob/{bid}")
+    public List<Job> searchAllMyJob(@PathVariable("bid") Integer bid) {
+        return service.searchAllMyJob(bid);
+    }
+
+    @RequestMapping("/findMine/{bid}")
+    public List<Boss> findMine(@PathVariable("bid") Integer bid) {
+        return service.findMine(bid);
     }
 }

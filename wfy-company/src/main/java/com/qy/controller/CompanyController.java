@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 public class CompanyController {
 
@@ -16,5 +18,12 @@ public class CompanyController {
     @RequestMapping("/createCompany")
     public String createCompany(@RequestBody Company company) {
         return companyService.insertCompany(company);
+    }
+
+    @RequestMapping("/findCid")
+    public Integer findCid(@RequestBody Map map) {
+        Integer bid = (Integer) map.get("bid");
+
+        return companyService.findCid(bid);
     }
 }

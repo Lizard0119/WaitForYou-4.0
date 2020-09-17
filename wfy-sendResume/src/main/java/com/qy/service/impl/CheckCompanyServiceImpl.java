@@ -2,6 +2,7 @@ package com.qy.service.impl;
 
 import com.qy.dao.CheckCompanyDao;
 import com.qy.pojo.search.Company;
+import com.qy.pojo.sendresume.CompanyJobHR;
 import com.qy.service.CheckCompanyService;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,11 @@ public class CheckCompanyServiceImpl implements CheckCompanyService {
     private CheckCompanyDao companyDao;
     @Override
     public Company selectCompanyByBossid(int bossid) {
-        return companyDao.selectCompanyByBossid( bossid);
+        return companyDao.selectCompanyByBossid(bossid);
+    }
+
+    @Override
+    public CompanyJobHR getcompanyJobHR(int userid) {
+        return companyDao.getcompanyJobHR(userid);
     }
 }

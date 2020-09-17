@@ -16,4 +16,9 @@ public class CompanyServiceImpl implements CompanyService {
     public String insertCompany(Company company) {
         return dao.createCompany(company) ? "success" : "failed";
     }
+
+    @Override
+    public Integer findCid(Integer bid) {
+        return dao.findCompanyId(bid);
+    }
 }

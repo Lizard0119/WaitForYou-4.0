@@ -16,4 +16,6 @@ public interface CheckResumeService {
     int deleteResumeByUserId(int userid);
     //根据用户id查简历
     Resume selectResumeByuserId(int userid);
+    //查 该HR下 所有 用户
+    List<UserAndJob> selectResumeByBoss(Integer bossid);
 }

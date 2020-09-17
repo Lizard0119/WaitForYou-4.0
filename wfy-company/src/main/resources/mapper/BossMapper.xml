@@ -4,12 +4,26 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.qy.dao.BossDao">
-    <resultMap id="createBoss" type="Boss">
+    <resultMap id="createBoss" type="Job">
+        <id property="jobId" column="job_id"/>
+        <result property="jobName" column="job_name"/>
+        <result property="jobPay" column="job_pay"/>
+        <result property="jobSketch" column="job_sketch"/>
+        <result property="jobDes" column="job_des"/>
+        <result property="jobCreateTime" column="job_create_time"/>
+        <result property="jobStatues" column="job_statues"/>
+        <result property="jobReserved" column="job_reserved"/>
+        <result property="jobReserved1" column="job_reserved1"/>
+    </resultMap>
+    <resultMap id="abc" type="BossCompany">
         <id property="bossId" column="boss_id"/>
         <result property="bossName" column="boss_name"/>
         <result property="bossSex" column="boss_sex"/>
         <result property="bossPhone" column="boss_phone"/>
         <result property="bossCompanyId" column="boss_companyid"/>
+        <result property="companyId" column="company_id"/>
+        <result property="companyName" column="company_name"/>
+        <result property="companyShortName" column="company_shortname"/>
     </resultMap>
 
     <insert id="createBoss">
@@ -23,4 +37,17 @@
     <insert id="bossJob">
         insert into  tb_boss_job values (#{bid},#{jid});
     </insert>
+
+    <select id="searchAllMyJob" resultMap="createBoss">
+        SELECT tj.*
+            FROM tb_boss tb
+	        JOIN tb_boss_job tbj ON tb.`boss_id`=tbj.`boss_id`
+	        JOIN tb_job tj ON tbj.`job_id`=tj.`job_id`
+	        WHERE tb.`boss_id`=#{bid}
+    </select>
+
+    <select id="findMine" resultMap="abc">
+        SELECT tb.*,tc.`company_name` FROM tb_boss tb JOIN tb_company tc ON tb.`boss_companyid`=tc.`company_id`
+WHERE tb.`boss_id`=#{bid}
+    </select>
 </mapper>

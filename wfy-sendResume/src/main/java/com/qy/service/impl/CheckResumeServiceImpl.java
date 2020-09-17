@@ -35,4 +35,9 @@ public class CheckResumeServiceImpl implements CheckResumeService {
     public Resume selectResumeByuserId(int userid) {
         return selectResumeClient.sff(userid);
     }
+    //查 该HR下 所有 用户
+    @Override
+    public List<UserAndJob> selectResumeByBoss(Integer bossid) {
+        return checkResumeDao.selectResumeByBoss(bossid);
+    }
 }

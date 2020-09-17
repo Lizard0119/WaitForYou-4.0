@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class BossServiceImpl implements BossService {
@@ -28,5 +29,15 @@ public class BossServiceImpl implements BossService {
     @Override
     public String bossJob(Integer bid, Integer jid) {
         return dao.bossJob(bid, jid) ? "success" : "failed";
+    }
+
+    @Override
+    public List<Job> searchAllMyJob(Integer bid) {
+        return dao.searchAllMyJob(bid);
+    }
+
+    @Override
+    public List<Boss> findMine(Integer bid) {
+        return dao.findMine(bid);
     }
 }
