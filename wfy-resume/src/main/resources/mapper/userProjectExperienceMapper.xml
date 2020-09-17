@@ -28,7 +28,7 @@
     <!--  项目经验和用户的关联表用项目经验的添加  -->
     <insert id="saveResumeUserProjectExperience">
     insert into tb_user_projectexperience (projectexperience_id,user_id)
-    values ( #{projectexperienceId},#{userId} )
+    values ( #{projectExperienceId},#{userId} )
     </insert>
 
 

@@ -44,6 +44,7 @@ public class ResumeController {
         resume.setSocial(socialService.findResumeBySocialUserId(userId));
         resume.setWorkExperience(workExperienceService.findResumeByWorkExperienceUserId(userId));
         System.out.println(1);
+        System.out.println(resume.toString());
         return resume;
     }
 
